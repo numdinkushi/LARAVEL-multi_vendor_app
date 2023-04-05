@@ -28,7 +28,7 @@ class UserFactory extends Factory
             'role' => fake()->randomElement(['admin', 'vendor', 'customer']),
             'status' => fake()->randomElement(['active', 'inactive']),
             'remember_token' => Str::random(10),
-     ];
+        ];
     }
 
     /**
