@@ -43,10 +43,10 @@
                 <nav class="sidebar-nav">
                     <ul class="main-menu metismenu">
                         <li class="active"><a href="index.html"><i class="icon-home"></i><span>Dashboard</span></a></li>
-                        <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-picture"></i><span>Manage Banner</span> </a>
+                        <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-picture"></i><span>{{__('Manage Banner')}}</span> </a>
                             <ul>
-                                <li><a href="departments.html">All Departments</a></li>
-                                <li><a href="add-departments.html">Add Departments</a></li>
+                                <li><a href="{{route('banner.index')}}">{{__('All Banners')}}</a></li>
+                                <li><a href="{{route('banner.create')}}">{{__('Add Departments')}}</a></li>
                             </ul>
                         </li>
                         <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-organization"></i><span>Manage Category</span> </a>
