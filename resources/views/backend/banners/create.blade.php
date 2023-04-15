@@ -20,6 +20,8 @@
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="card">
                     <div class="body">
+                  <form action="{{route('banner.store')}}" method="POST">
+                    @csrf
                         <div class="row">
                             <div class="col-lg-6 col-md-12">
                                 <div class="form-group">
@@ -37,19 +39,26 @@
                                         <i class="fa fa-picture-o"></i> Choose
                                       </a>
                                     </span>
-                                    <input id="thumbnail" class="form-control" type="text" name="filepath">
+                                    <input id="thumbnail" class="form-control" type="text" name="photo">
                                   </div>
                                   <div id="holder" style="margin-top:15px;max-height:100px;"></div>
                           </div>
                     </div>
                      </div>
                         <div class="row clearfix">
+                            <div class="col-md-12">
+                                {{-- @if ($errors->any())
+                                <ul>
+                                    <li> {{$error}} </li>
+                                </ul>     
+                                @endif --}}
+                            </div>
                             <div class="col-lg-6 col-md-12">  
                                 <label for="">Status<span class="text-danger">*</span></label>                              
                                 <select name="status" class="form-control show-tick">
                                     <option >-- Status --</option>
                                     <option value="active" {{old('status') == 'active' ? 'selected' : ''}}>Active</option>
-                                    <option value="inactive" {{old('status') == 'inactive' ? 'selected' : ''}}>Active</option>
+                                    <option value="inactive" {{old('status') == 'inactive' ? 'selected' : ''}}>Inactive</option>
                                 </select>
                             </div>
                             <div class="col-lg-6 col-md-12">    
@@ -74,6 +83,7 @@
                             </div>
                         </div>
                     </div>
+                </form>
                 </div>
             </div>
         </div>
