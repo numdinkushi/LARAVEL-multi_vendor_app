@@ -29,19 +29,12 @@
             
             <div class="row clearfix">
                 <div class="col-lg-12">
+                    @include('backend.layouts.notification')
+                </div>
+                <div class="col-lg-12">
                     <div class="card">
                         <div class="header">
-                            <h2><strong>Library</strong> List</h2>
-                            <ul class="header-dropdown">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
-                                    <ul class="dropdown-menu dropdown-menu-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another Action</a></li>
-                                        <li><a href="javascript:void(0);">Something else</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+                            <h2><strong>Banner</strong> List</h2>
                         </div>
                         <div class="body">
                             <div class="table-responsive">
@@ -50,148 +43,74 @@
                                         <tr>
                                             <th>No.</th>
                                             <th>Title</th>
-                                            <th>Subject</th>
-                                            <th>Department</th>
-                                            <th>Type</th>
-                                            <th>Year</th>
+                                            <th>Description</th>
+                                            <th>Photo</th>
+                                            <th>Condition</th>
                                             <th>Status</th>
+                                            <th>Action</th>
                                         </tr>
-                                    </thead>                            
+                                    </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Data Structures using C & C++</td>
-                                            <td>C++</td>
-                                            <td>Computar</td>
-                                            <td>PDF</td>
-                                            <td>First Year</td>
-                                            <td>In Stock</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Introduction to Computers</td>
-                                            <td>Computers</td>
-                                            <td>Computers</td>
-                                            <td>Book</td>
-                                            <td>Second Year</td>
-                                            <td>In Stock</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Management Information System</td>
-                                            <td>Management</td>
-                                            <td>Information</td>
-                                            <td>PDF</td>
-                                            <td>Fourth Year</td>
-                                            <td>In Stock</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>Operating System Concepts</td>
-                                            <td>Computers</td>
-                                            <td>Computers</td>
-                                            <td>Book</td>
-                                            <td>First Year</td>
-                                            <td>In Stock</td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>Computer Networking</td>
-                                            <td>Management</td>
-                                            <td>Computer</td>
-                                            <td>PDF</td>
-                                            <td>Second Year</td>
-                                            <td>In Stock</td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td>Graphics</td>
-                                            <td>Management</td>
-                                            <td>Architecture</td>
-                                            <td>Book</td>
-                                            <td>Fourth Year</td>
-                                            <td>In Stock</td>
-                                        </tr>
-                                        <tr>
-                                            <td>7</td>
-                                            <td>Computer Networks</td>
-                                            <td>Networks</td>
-                                            <td>Computer</td>
-                                            <td>PDF</td>
-                                            <td>First Year</td>
-                                            <td>In Stock</td>
-                                        </tr>
-                                        <tr>
-                                            <td>8</td>
-                                            <td>Animation</td>
-                                            <td>Management</td>
-                                            <td>Computer</td>
-                                            <td>Book</td>
-                                            <td>Fourth Year</td>
-                                            <td>In Stock</td>
-                                        </tr>
-                                        <tr>
-                                            <td>9</td>
-                                            <td>Electronics</td>
-                                            <td>Management</td>
-                                            <td>Computer</td>
-                                            <td>Book</td>
-                                            <td>First Year</td>
-                                            <td>In Stock</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10</td>
-                                            <td>Integrated Circuits</td>
-                                            <td>Management</td>
-                                            <td>Architecture</td>
-                                            <td>Book</td>
-                                            <td>First Year</td>
-                                            <td>In Stock</td>
-                                        </tr>
-                                        <tr>
-                                            <td>11</td>
-                                            <td>Electronics</td>
-                                            <td>Management</td>
-                                            <td>Architecture</td>
-                                            <td>Book</td>
-                                            <td>First Year</td>
-                                            <td>In Stock</td>
-                                        </tr>
-                                        <tr>
-                                            <td>12</td>
-                                            <td>Animation Graphic Fundamentals	</td>
-                                            <td>Management</td>
-                                            <td>Architecture</td>
-                                            <td>Book</td>
-                                            <td>First Year</td>
-                                            <td>In Stock</td>
-                                        </tr>
-                                        <tr>
-                                            <td>13</td>
-                                            <td>Electronics</td>
-                                            <td>Management</td>
-                                            <td>Architecture</td>
-                                            <td>Book</td>
-                                            <td>First Year</td>
-                                            <td>In Stock</td>
-                                        </tr>
-                                        <tr>
-                                            <td>14</td>
-                                            <td>Graphic Designing</td>
-                                            <td>Management</td>
-                                            <td>Architecture</td>
-                                            <td>Book</td>
-                                            <td>First Year</td>
-                                            <td>In Stock</td>
-                                        </tr>
+                                        @foreach ($banners as $banner)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $banner->title }}</td>
+                                                <td>{{ $banner->description }}</td>
+                                                <td class="d-flex justify-content-center"> <img src="{{ $banner->photo }}" alt="" height="50" width="50"> </td>
+                                                <td>
+                                                    @if ($banner->condition == 'banner')
+                                                        <span class="badge badge-success"> {{ $banner->condition }}</span>
+                                                    @else
+                                                        <span class="badge badge-primary"> {{ $banner->condition }}</span>
+                                                    @endif
+                                                </td>
+                                                <td> <input type="checkbox" name="toggle" value="{{$banner->id}}" data-toggle="switchbutton" {{$banner->status == 'active' ? 'checked' : ''}} data-onlabel="active" data-offlabel="inactive" data-onstyle="success" data-size="sm" data-offstyle="danger"> </td>
+                                                <td >
+                                                    <div class="d-flex justify-content-around">   
+                                                        <a href="{{route('banner.edit', $banner->id)}}" data-toggle="tool-tip" title='edit' data-placement="bottom" class="btn btn-sm btn-outline-warning" ><span class="fa fa-edit"></span></a>
+                                                        <form action="{{route('banner.destroy', $banner->id)}}" method="POST">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <a href="" data-toggle="tool-tip" title='delete' data-id="{{$banner->id}}" data-placement="bottom" class="btn dltBtn btn-sm btn-outline-danger" ><span class="fa fa-trash"></span></a>
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                    </div>                   
+                    </div>
                 </div>
             </div>
 
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $('input[name=toggle]').change(function(){
+            const mode = $(this).prop('checked');
+            const id = $(this).val();
+            
+            $.ajax({ 
+                url: "{{route('banner.status')}}",
+                type: "POST",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    mode: mode,
+                    id: id
+                },
+                success: function(response) {
+                   if(response.status){
+                    alert(response.msg)
+                     }else{
+                        alert('please try again');
+                   }
+                }
+            })
+        })
+    </script>
 @endsection

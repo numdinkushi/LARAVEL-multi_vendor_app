@@ -46,7 +46,7 @@
                         <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-picture"></i><span>{{__('Manage Banner')}}</span> </a>
                             <ul>
                                 <li><a href="{{route('banner.index')}}">{{__('All Banners')}}</a></li>
-                                <li><a href="{{route('banner.create')}}">{{__('Add Departments')}}</a></li>
+                                <li><a href="{{route('banner.create')}}">{{__('Create Banner')}}</a></li>
                             </ul>
                         </li>
                         <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-organization"></i><span>Manage Category</span> </a>

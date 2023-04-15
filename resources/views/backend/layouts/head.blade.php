@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="{{asset('backend/assets/vendor/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css')}}">
 <link rel="stylesheet" href="{{asset('backend/assets/vendor/morrisjs/morris.min.css')}}" />
 <link rel="stylesheet" href="{{asset('backend/assets/vendor/jquery-datatable/dataTables.bootstrap4.min.css')}}">
+<link rel="stylesheet" href="{{asset('backend/assets/vendor/switch-button-bootstrap/css/bootstrap-switch-button.css')}}">
 
 {{-- summernote --}}
 <link rel="stylesheet" href="{{asset('backend/assets/summernote-0.8.18-dist/summernote.css')}}">
