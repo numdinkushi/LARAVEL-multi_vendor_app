@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-8 col-sm-12">
                         <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i
-                                    class="fa fa-arrow-left"></i></a>Add Students</h2>
+                                    class="fa fa-arrow-left"></i></a>Add Banner</h2>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin') }}"><i class="icon-home"></i></a></li>
                             <li class="breadcrumb-item">{{ __('Banner') }}</li>
@@ -80,6 +80,7 @@
                                 <div class="row clearfix">
                                     <div class="col-sm-12">
                                         <div class="form-group mt-3">
+                                            <label for="">Description</label>
                                             <textarea rows="4" columns='19' class="form-control" id="description" name="description"
                                                 placeholder="Description">{{ old('description') }}</textarea>
                                         </div>

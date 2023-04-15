@@ -65,17 +65,14 @@
                                                     @endif
                                                 </td>
                                                 <td> <input type="checkbox" name="toggle" value="{{$banner->id}}" data-toggle="switchbutton" {{$banner->status == 'active' ? 'checked' : ''}} data-onlabel="active" data-offlabel="inactive" data-onstyle="success" data-size="sm" data-offstyle="danger"> </td>
-                                               {{-- <td>
-                                              <!-- Default switch -->
-                                              <div class="form-check form-switch mt-2">
-                                                <input class="form-check-input" name="toggle" type="checkbox" id="switchChecked" value="{{$banner->id}}" {{$banner->status == 'active' ? 'checked' : ''}}>
-                                                <label class="form-check-label" for="switchChecked">Checked switch checkbox</label>
-                                            </div>
-                                               </td> --}}
                                                 <td >
                                                     <div class="d-flex justify-content-around">   
                                                         <a href="{{route('banner.edit', $banner->id)}}" data-toggle="tool-tip" title='edit' data-placement="bottom" class="btn btn-sm btn-outline-warning" ><span class="fa fa-edit"></span></a>
-                                                        <a href="" data-toggle="tool-tip" title='edit' data-placement="bottom" class="btn btn-sm btn-outline-danger" ><span class="fa fa-trash"></span></a>
+                                                        <form action="{{route('banner.destroy', $banner->id)}}" method="POST">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <a href="" data-toggle="tool-tip" title='delete' data-id="{{$banner->id}}" data-placement="bottom" class="btn dltBtn btn-sm btn-outline-danger" ><span class="fa fa-trash"></span></a>
+                                                        </form>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -107,7 +104,11 @@
                     id: id
                 },
                 success: function(response) {
-                    console.log(2222, response.status);
+                   if(response.status){
+                    alert(response.msg)
+                     }else{
+                        alert('please try again');
+                   }
                 }
             })
         })
