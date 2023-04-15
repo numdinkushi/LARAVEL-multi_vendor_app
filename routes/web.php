@@ -28,4 +28,4 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('banner', BannerController::class);
 });
 
-// Route::get('/admin', [App\Http\Controllers\AdminController::class, 'admin'])->name('admin');
+Route::post('/banner_status', [App\Http\Controllers\BannerController::class, 'bannerStatus'])->name('banner.status');
