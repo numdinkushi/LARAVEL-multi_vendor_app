@@ -36,26 +36,20 @@ class BannerController extends Controller
             'condition' => 'nullable|in:banner,promo',
             'status' => 'nullable|in:active,inactive',
         ]);
-
         $data = $request->all();
-        $slug = str::slug($request->input('slug'));
-        $slug_count = Banner::where('slug', $slug)->count();
-
-        if($slug_count > 0){
-            $slug .= time().'-'.$slug;
+        $slug = Str::slug($request->input('title'));
+        $slugCount = Banner::where('slug', $slug)->count();
+        if ($slugCount > 0) {
+            $slug .= time() . '_' . $slug;
         }
-        
         $data['slug'] = $slug;
-        
         $status = Banner::create($data);
 
-        if($status){
-            return redirect()->route('banner.index')->with('success', 'banner successfully createed');
+        if ($status) {
+            return redirect()->route('banner.index')->with('success', 'Banner succesfully created');
         } else {
-            return back()->with('error', 'something went wrong!');  
+            return back()->with('error', 'Something went wrong');
         }
-
-        return $data;
 
     }
 

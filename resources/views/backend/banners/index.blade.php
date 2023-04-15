@@ -29,6 +29,9 @@
             
             <div class="row clearfix">
                 <div class="col-lg-12">
+                    @include('backend.layouts.notification')
+                </div>
+                <div class="col-lg-12">
                     <div class="card">
                         <div class="header">
                             <h2><strong>Library</strong> List</h2>
