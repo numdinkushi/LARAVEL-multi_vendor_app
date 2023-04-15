@@ -15,3 +15,9 @@
 <script src="{{asset('backend/assets/js/index.js')}}"></script>
 
 @yield('scripts')
+
+<script>
+    setTimeout(() => {
+        $('#alert').slideUp();
+    }, 3000);
+</script>
