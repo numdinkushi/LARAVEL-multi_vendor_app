@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -11,7 +13,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::orderBy('id', 'DESC')->get();
+        return view('backend.categories.index', compact('categories'));
     }
 
     /**
@@ -46,6 +49,16 @@ class CategoryController extends Controller
         //
     }
 
+    public function categoryStatus(Request $request)
+    {
+        if($request->mode == 'true'){
+            DB::table('categories')->where('id', $request->id)->update(['status' => 'active']);
+        } else {
+            DB::table('categories')->where('id', $request->id)->update(['status' => 'inactive']);
+        }
+        return response()->json(['msg' => 'successfully updated', 'status' => true]);
+    }
+
     /**
      * Update the specified resource in storage.
      */
@@ -59,6 +72,18 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $category = Category::find($id);
+
+        if($category){
+           $status = $category->delete();
+ 
+           if($status){
+             return redirect()->route('category.index')->with('success', 'Category succesfully deleted');
+           }else{
+             return back()->with('error', 'oops, something went wrong');
+           }
+        }else{
+             return back()->with('error', 'Data not found');
+        }
     }
 }
