@@ -51,8 +51,8 @@
                         </li>
                         <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-organization"></i><span>Manage Category</span> </a>
                             <ul>
-                                <li><a href="departments.html">All Departments</a></li>
-                                <li><a href="add-departments.html">Add Departments</a></li>
+                                <li><a href="{{route('category.index')}}">All Categories</a></li>
+                                <li><a href="{{route('category.create')}}">Create Categories</a></li>
                             </ul>
                         </li>
                         <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-briefcase"></i><span>Products</span> </a>
