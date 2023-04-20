@@ -18,13 +18,13 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker()->title,
-            'slug' => $this->faker()->slug,
-            'summary' => $this->faker()->sentences(3, true),
-            'photo' => $this->faker()->imageUrl(100, 100),
-            'is_parent' => $this->faker()->randomElement([true, false]),
-            'status' => $this->faker()->randomElement(['active', 'inactive']),
-            'parent_id' => $this->faker()->randomElement(Category::pluck('id')->toArray())
+            'title' => $this->faker->title,
+            'slug' => $this->faker->slug,
+            'summary' => $this->faker->sentences(3, true),
+            'photo' => $this->faker->imageUrl(100, 100),
+            'is_parent' => $this->faker->randomElement([true, false]),
+            'status' => $this->faker->randomElement(['active', 'inactive']),
+            'parent_id' => $this->faker->randomElement(Category::pluck('id')->toArray())
         ];
     }
 }
