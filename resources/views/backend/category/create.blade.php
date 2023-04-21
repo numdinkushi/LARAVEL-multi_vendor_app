@@ -7,11 +7,11 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-8 col-sm-12">
                         <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i
-                                    class="fa fa-arrow-left"></i></a>Add Banner</h2>
+                                    class="fa fa-arrow-left"></i></a>Add Category</h2>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin') }}"><i class="icon-home"></i></a></li>
-                            <li class="breadcrumb-item">{{ __('Banner') }}</li>
-                            <li class="breadcrumb-item active">{{ __('Add Banner') }}</li>
+                            <li class="breadcrumb-item">{{ __('Category') }}</li>
+                            <li class="breadcrumb-item active">{{ __('Add Category') }}</li>
                         </ul>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="card">
                         <div class="body">
-                            <form action="{{route('banner.store')}}" method="POST">
+                            <form action="{{route('category.store')}}" method="POST">
                                 @csrf
                                 <div class="row">
                                     <div class="col-lg-6 col-md-12">
@@ -62,27 +62,33 @@
                                 <div class="row clearfix">
                                     <div class="col-lg-6 col-md-12">
                                         <label for="">Status<span class="text-danger">*</span></label>
-                                        <select  class="form-control show-tick">
+                                        <select name="status"  class="form-control show-tick">
                                             <option value="active" >Active</option>
                                             <option value="inactive" > Inactive</option>
                                         </select>
                                     </div>
-                                    <div class="col-lg-6 col-md-12">
-                                        <label for="">Condition</label>
-                                        <select name="condition" class="form-control show-tick">
-                                            <option value="banner" {{ old('condition') == 'banner' ? 'selected' : '' }}>
-                                                Banner</option>
-                                            <option value="promo" {{ old('status') == 'promo' ? 'selected' : '' }}>
-                                                Promotion</option>
+                                    <div class="col-sm-12">
+                                        <div class="form-group mt-3">
+                                            <label for="">Is Parent:  <i  class="text-danger">*</i></label>
+                                            <input id="is_parent" type="checkbox" name="is_parent" value="1" checked> Yes
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 d-none" id="parent_category_div">
+                                        <label for="">Parent Category<span class="text-danger">*</span></label>
+                                        <select name="parent_id" class="form-control show-tick">
+                                            @foreach ($parent_cats as $parent_category)
+                                            {{-- {{dd($parent_category)}} --}}
+                                             <option value="{{$parent_category->id}}" >{{$parent_category->title}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
                                 <div class="row clearfix">
                                     <div class="col-sm-12">
                                         <div class="form-group mt-3">
-                                            <label for="">Description</label>
-                                            <textarea rows="4" columns='19' class="form-control" id="description" name="description"
-                                                placeholder="Description">{{ old('description') }}</textarea>
+                                            <label for="">Summary</label>
+                                            <textarea rows="4" columns='19' class="form-control" id="summary" name="summary"
+                                                placeholder="Summary">{{ old('summary') }}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
@@ -109,7 +115,20 @@
 
     <script>
         $(document).ready(function() {
-            $('#description').summernote();
+            $('#summary').summernote();
+        });
+    </script>
+    
+    <script>
+        $('#is_parent').change(function(e) {
+           e.preventDefault();
+           const isChecked = $('#is_parent').prop('checked');
+        if(isChecked){
+            $('#parent_category_div').addClass('d-none');
+        } else{
+            $('#parent_category_div').removeClass('d-none');
+            $('#parent_category_div').val('');
+        }
         });
     </script>
 @endsection

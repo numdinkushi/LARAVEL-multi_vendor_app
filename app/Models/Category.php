@@ -15,7 +15,7 @@ class Category extends Model
         'photo',
         'summary',
         'is_parent',
-        'parentId',
+        'parent_id',
         'status'
     ];
 }
