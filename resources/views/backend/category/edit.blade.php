@@ -71,15 +71,15 @@
                                     <div class="col-sm-12">
                                         <div class="form-group mt-3">
                                             <label for="">Is Parent:  <i  class="text-danger">*</i></label>
-                                            <input id="is_parent" type="checkbox" name="is_parent" value="{{$category->is_parent }}"  {{$category->is_parent == true ? 'checked' : ''}} > {{$category->is_parent == true ? 'Yes' : 'No'}}
+                                            <input id="is_parent" type="checkbox" name="is_parent" value="{{$category->is_parent }}"  {{$category->is_parent == '1' ? 'checked' : ''}} > {{$category->is_parent == 1 ? 'Yes' : 'No'}}
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 col-md-12 d-none" id="parent_category_div">
+                                    <div class="col-lg-6 col-md-12  {{$category->is_parent == '1' ? 'd-none' : ''}}"   id="parent_category_div">
                                         <label for="">Parent Category<span class="text-danger">*</span></label>
                                         <select name="parent_id" class="form-control show-tick">
                                             @foreach ($parent_cats as $parent_category)
                                             {{-- {{dd($parent_category)}} --}}
-                                             <option value="{{$parent_category->id}}" >{{$parent_category->title}}</option>
+                                             <option value="{{$parent_category->id}}"   {{$parent_category->id == $category->parent_id ? 'selected' : ''}} >{{$parent_category->title}}</option>
                                             @endforeach
                                         </select>
                                     </div>

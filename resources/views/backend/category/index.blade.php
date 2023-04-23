@@ -49,7 +49,7 @@
                                                 <td>{{ $category->title }}</td>
                                                 {{-- <td>{!! html_entity_decode($category->description) !!}</td> --}}
                                                 <td class="d-flex justify-content-center"> <img src="{{ $category->photo }}" alt="" height="50" width="50"> </td>
-                                                <td> {{$category->is_parent == '1' ? 'yes' : 'no'}} </td>
+                                                <td> {{$category->is_parent == '1' ? 'Yes' : 'No'}} </td>
                                                 <td> {{\App\Models\Category::where('id', $category->parent_id)->value('title')}} </td>
                                                 <td> <input type="checkbox" name="toggle" value="{{$category->id}}" data-toggle="switchbutton" {{$category->status == 'active' ? 'checked' : ''}} data-onlabel="active" data-offlabel="inactive" data-onstyle="success" data-size="sm" data-offstyle="danger"> </td>
                                                 {{-- <td> {{$category->summary}}</td> --}}
