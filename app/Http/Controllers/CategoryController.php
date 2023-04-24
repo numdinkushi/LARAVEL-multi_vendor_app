@@ -26,7 +26,6 @@ class CategoryController extends Controller
     public function create()
     {
         $parent_cats = Category::where('is_parent', 1) ->orderBy('title', 'ASC') ->get();
-        // dd( $parent_cats );
         return view('backend.category.create', compact('parent_cats'));
     }
 
@@ -44,13 +43,18 @@ class CategoryController extends Controller
             'status' => 'nullable|in:active,inactive',
         ]);
         $data = $request->all();
-        // return ( $data );
+
         $slug = Str::slug($request->input('title'));
         $slugCount = Category::where('slug', $slug)->count();
+
         if ($slugCount > 0) {
             $slug .= time() . '_' . $slug;
         }
         $data['slug'] = $slug;
+
+        if ($request->is_parent == 1) {
+            $data['parent_id'] = null;
+        } 
         $data['is_parent'] = $request->input('parent_id', 0);
         $status = Category::create($data);
 
@@ -109,6 +113,8 @@ class CategoryController extends Controller
 
     public function update(Request $request, string $id)
     {
+        // return $request->all();
+
         $category = Category::find($id);
 
         if ($category) {
@@ -125,8 +131,13 @@ class CategoryController extends Controller
             if ($request->is_parent == 1) {
                 $data['parent_id'] = null;
             }
+            else{
+
+                // $data['parent_id'] = $request->input('parent_id', 0);
+                $data['is_parent'] = 0;
+
+            }
             
-            $data['parent_id'] = $request->input('parent_id', 0);
             $status = $category->fill($data)->save();
 
             if ($status) {
