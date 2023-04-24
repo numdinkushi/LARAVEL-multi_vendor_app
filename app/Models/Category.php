@@ -18,4 +18,8 @@ class Category extends Model
         'parent_id',
         'status'
     ];
+
+    public static function shiftChild($category_id){
+        return Category::whereIn('id', $category_id)->update(['is_parent' => 1]);
+    }
 }

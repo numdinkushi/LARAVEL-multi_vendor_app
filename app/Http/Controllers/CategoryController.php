@@ -158,10 +158,15 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
 
+        $child_category_id = Category::where( 'parent_id', $id,)->pluck('id');
+
         if ($category) {
             $status = $category->delete();
 
             if ($status) {
+                if($child_category_id->count() > 0){
+                    Category::shiftChild($child_category_id);
+                }
                 return redirect()
                     ->route('category.index')
                     ->with('success', 'Category succesfully deleted');
