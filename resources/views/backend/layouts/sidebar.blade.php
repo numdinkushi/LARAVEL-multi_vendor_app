@@ -55,6 +55,12 @@
                                 <li><a href="{{route('category.create')}}">Create Categories</a></li>
                             </ul>
                         </li>
+                        <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-handbag"></i><span>Manage Brands</span> </a>
+                            <ul>
+                                <li><a href="{{route('brand.index')}}">All Brands</a></li>
+                                <li><a href="{{route('brand.create')}}">Create Brands</a></li>
+                            </ul>
+                        </li>
                         <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-briefcase"></i><span>Products</span> </a>
                             <ul>
                                 <li><a href="departments.html">All Departments</a></li>
