@@ -44,10 +44,13 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($products as $product)
+                                        @php
+                                            $photo = explode(',',$product->photo);
+                                        @endphp
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td class="text-uppercase">{{ $product->title }}</td>
-                                                <td class="d-flex justify-content-center"> <img src="{{ $product->photo }}" alt="" height="50" width="50"> </td>
+                                                <td >{{ $product->title }}</td>
+                                                <td class="d-flex justify-content-center"> <img src="{{ $photo[0] }}" alt="" height="50" width="50"> </td>
                                                 <td>${{number_format($product->price, 2)}}</td>
                                                 <td>{{number_format($product->discount, 2)}}%</td>
                                                 <td>{{$product->size}}</td>
@@ -80,7 +83,7 @@
                                                     @endphp
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">{{$product->title}}</h1>
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel text-uppercase">{{$product->title}}</h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
@@ -135,6 +138,16 @@
                                                                     <div  class="col-md-6"> 
                                                                         <b>Condition: </b>    
                                                                         <div>{{ $product->conditions}}</div>    
+                                                                    </div>
+                                                                    <div  class="col-md-6"> 
+                                                                        <b>Stock: </b>    
+                                                                        <div>{{ $product->stock}}</div>    
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div  class="col-md-6"> 
+                                                                        <b>Vendor: </b>    
+                                                                        <div>{{ \App\Models\User::where('id', $product->vendor_id)->value('full_name')}}</div>    
                                                                     </div>
                                                                 </div>
                                                                 </div> 

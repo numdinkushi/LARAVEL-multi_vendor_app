@@ -98,7 +98,13 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $product = Product::find($id);
+
+        if ($product) {
+            return view( 'backend.product.edit', compact(['product']) );
+        } else {
+            return back()->with('error', 'Product not found');
+        }
     }
 
     /**
@@ -106,7 +112,38 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $product = Product::find($id);
+
+        if ($product) {
+            $this->validate($request, [
+            'title' => 'required|string',
+            'summary' =>  'required|string',
+            'description' => 'string|nullable',
+            'stock' => 'nullable|numeric',
+            'price' => 'required|numeric',
+            'discount' => 'nullable|numeric',
+            'photo' => 'required',
+            'category_id' => 'required|exists:categories,id',
+            'child_category_id' => 'nullable|exists:categories,id',
+            'size' => 'nullable',
+            'conditions' => 'nullable',
+            'status' => 'nullable|exists:active,inactive',
+            ]);
+            
+            $data = $request->all();
+            
+            $data['offer_price'] = ($request->price - (($request->price * $request->discount)/100));
+            
+            $status = $product->fill($data)->save();
+
+            if ($status) {
+                return redirect() ->route('product.index') ->with('success', 'Product succesfully updated');
+            } else {
+                return back()->with('error', 'Something went wrong');
+            }
+         }else {
+            return back()->with('error', 'Product not found');
+     }
     }
 
     /**
@@ -114,6 +151,20 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $product = Product::find($id);
+
+        if ($product) {
+            $status = $product->delete();
+
+            if ($status) {
+                return redirect()
+                    ->route('product.index')
+                    ->with('success', 'Product succesfully deleted');
+            } else {
+                return back()->with('error', 'oops, something went wrong');
+            }
+        } else {
+            return back()->with('error', 'Data not found');
+        }
     }
 }
