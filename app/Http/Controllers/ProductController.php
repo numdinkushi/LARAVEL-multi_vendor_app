@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Str;
 class ProductController extends Controller
 {
     /**
@@ -32,15 +32,51 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.product.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
+    {                
+        $this->validate($request, [
+            'title' => 'required|string',
+            'summary' =>  'required|string',
+            'description' => 'string|nullable',
+            'stock' => 'nullable|numeric',
+            'price' => 'required|numeric',
+            'discount' => 'nullable|numeric',
+            'photo' => 'required',
+            'category_id' => 'required|exists:categories,id',
+            'child_category_id' => 'nullable|exists:categories,id',
+            'size' => 'nullable',
+            'conditions' => 'nullable',
+            'status' => 'nullable|exists:active,inactive',
+        ]);
+
+        $data = $request->all();
+
+        $slug = Str::slug($request->input('title'));
+        $slugCount = Product::where('slug', $slug)->count();
+
+        if ($slugCount > 0) {
+            $slug .= time() . '_' . $slug;
+        }
+
+        $data['slug'] = $slug;
+
+        $data['offer_price'] = ($request->price - (($request->price * $request->discount)/100));
+       
+        $status = Product::create($data);
+
+        if ($status) {
+            return redirect() ->route('product.index') ->with('success', 'Product succesfully created');
+        } else {
+            return back()->with('error', 'Something went wrong');
+        }
+
+        // return $data;
     }
 
     /**
@@ -48,7 +84,13 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $product = Product::find($id);
+
+        if ($product) {
+            return view( 'backend.product.view', compact(['product']) );
+        } else {
+            return back()->with('error', 'Product not found');
+        }
     }
 
     /**

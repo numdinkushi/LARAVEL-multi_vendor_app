@@ -22,4 +22,8 @@ class Category extends Model
     public static function shiftChild($category_id){
         return Category::whereIn('id', $category_id)->update(['is_parent' => 1]);
     }
+
+    public static function getChildByParentId($id){
+        return Category::whereIn('parent_id', $id)->pluck('title', 'id');
+    }
 }

@@ -15,6 +15,7 @@ class Product extends Model
         'description',
         'stock',
         'price',
+        'summary',
         'offer_price',
         'discount',
         'conditions',
