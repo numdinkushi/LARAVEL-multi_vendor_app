@@ -73,7 +73,7 @@
                                         <select name="vendor_id" class="form-control show-tick">
                                             <option value="">Select Vendor</option>
                                             @foreach (\App\Models\User::where('role', 'vendor')->get() as $vendor)
-                                            <option value="{{$vendor->id}}" >{{$vendor->full_name}}</option>
+                                            <option value="{{$vendor->id}}" {{ old('vendor') == $vendor->id ? 'selected' : '' }}>{{$vendor->full_name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -108,7 +108,7 @@
                                         <select name="brand_id" class="form-control show-tick">
                                             <option value="">Select brand</option>
                                             @foreach (\App\Models\Brand::get() as $brand)
-                                            <option value="{{$brand->id}}" >{{$brand->title}}</option>
+                                            <option value="{{$brand->id}} {{ old('brand_id') == $brand->id ? 'selected' : '' }}" >{{$brand->title}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -117,7 +117,7 @@
                                         <select id="category_id" name="category_id" class="form-control show-tick">
                                             <option value="">Select Category</option>
                                             @foreach (\App\Models\Category::where('is_parent', 1)->get() as $category)
-                                            <option value="{{$category->id}}" >{{$category->title}}</option>
+                                            <option value="{{$category->id}}" {{ old('category_id') == $category->id ? 'selected' : '' }} >{{$category->title}}</option>
                                             @endforeach
                                         </select>
                                     </div>
