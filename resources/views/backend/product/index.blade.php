@@ -46,7 +46,7 @@
                                         @foreach ($products as $product)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $product->title }}</td>
+                                                <td class="text-uppercase">{{ $product->title }}</td>
                                                 <td class="d-flex justify-content-center"> <img src="{{ $product->photo }}" alt="" height="50" width="50"> </td>
                                                 <td>${{number_format($product->price, 2)}}</td>
                                                 <td>{{number_format($product->discount, 2)}}%</td>
@@ -63,6 +63,7 @@
                                                 <td> <input type="checkbox" name="toggle" value="{{$product->id}}" data-toggle="switchbutton" {{$product->status == 'active' ? 'checked' : ''}} data-onlabel="active" data-offlabel="inactive" data-onstyle="success" data-size="sm" data-offstyle="danger"> </td>
                                                 <td >
                                                     <div class="d-flex justify-content-around gap-2 space-md-2">   
+                                                        <a  href="javascript:void(0);"  data-bs-toggle="modal" data-bs-target="#productId{{$product->id}}" data-toggle="tool-tip" title='show' data-placement="bottom" class="btn btn-sm btn-outline-secondary" ><span class="fa fa-eye"></span></a>
                                                         <a href="{{route('product.edit', $product->id)}}" data-toggle="tool-tip" title='edit' data-placement="bottom" class="btn btn-sm btn-outline-warning" ><span class="fa fa-edit"></span></a>
                                                         <form action="{{route('product.destroy', $product->id)}}" method="post" class="ml-md-2">
                                                             @csrf
@@ -71,6 +72,82 @@
                                                         </form>
                                                     </div>
                                                 </td>
+                                                {{-- modal --}}
+                                                <div class="modal fade" id="productId{{$product->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    @php
+                                                        $product = \App\Models\Product::where('id', $product->id)->first();
+                                                    @endphp
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">{{$product->title}}</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="col-md-12">
+                                                            <div class="row">
+                                                                <div class="d-flex flex-column gap-2">
+                                                                    <div  class=""> 
+                                                                        <b> Summary: </b>    
+                                                                        <div> {!!html_entity_decode($product->summary)!!} </div>    
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div  class="col-md-6 "> 
+                                                                            <b> Price: </b>    
+                                                                            <div> ${{number_format($product->price, 2)}} </div>    
+                                                                        </div>
+                                                                        <div  class="col-md-6 "> 
+                                                                            <b> Discount: </b>    
+                                                                            <div> {{number_format($product->discount, 2)}} %</div>    
+                                                                        </div>
+                                                                    </div>
+                                                                  <div class="row">
+                                                                    <div  class="col-md-6"> 
+                                                                        <b> Offer Price: </b>    
+                                                                        <div> ${{number_format($product->offer_price, 2)}} </div>    
+                                                                    </div>
+                                                                    <div  class="col-md-6"> 
+                                                                        <b> Category: </b>    
+                                                                        <div>{{\App\Models\Category::where('id', $product->category_id)->value('title') }}</div>    
+                                                                    </div>
+                                                                  </div>
+                                                                    <div class="row">
+                                                                        <div  class="col-md-6"> 
+                                                                            <b>Child Category: </b>    
+                                                                            <div>{{\App\Models\Category::where('id', $product->child_category_id)->value('title') }}</div>    
+                                                                        </div>
+                                                                        <div  class="col-md-6"> 
+                                                                            <b>Brand: </b>    
+                                                                            <div>{{\App\Models\Brand::where('id', $product->brand_id)->value('title') }}</div>    
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div  class="col-md-6"> 
+                                                                            <b>Size: </b>    
+                                                                            <div class="badge badge-success">{{ $product->size}}</div>    
+                                                                        </div>
+                                                                        <div  class="col-md-6"> 
+                                                                            <b>Status: </b>    
+                                                                            <div class="badge badge-warning">{{ $product->status}}</div>    
+                                                                        </div> 
+                                                                    </div>
+                                                                <div class="row">
+                                                                    <div  class="col-md-6"> 
+                                                                        <b>Condition: </b>    
+                                                                        <div>{{ $product->conditions}}</div>    
+                                                                    </div>
+                                                                </div>
+                                                                </div> 
+                                                             </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -97,8 +174,7 @@
         const form = $(this).closest('form');
         const dataID = $(this).data('id');
         e.preventDefault();
-        console.log(3323424)
-      
+              
         swal({
         title: "Are you sure?",
         text: "Once deleted, you will not be able to recover this imaginary file!",

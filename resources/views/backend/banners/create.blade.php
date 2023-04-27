@@ -72,7 +72,7 @@
                                         <select name="condition" class="form-control show-tick">
                                             <option value="banner" {{ old('condition') == 'banner' ? 'selected' : '' }}>
                                                 Banner</option>
-                                            <option value="promo" {{ old('status') == 'promo' ? 'selected' : '' }}>
+                                            <option value="promo" {{ old('condition') == 'promo' ? 'selected' : '' }}>
                                                 Promotion</option>
                                         </select>
                                     </div>

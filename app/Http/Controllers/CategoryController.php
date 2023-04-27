@@ -123,7 +123,7 @@ class CategoryController extends Controller
                 'summary' => 'string|nullable',
                 'is_parent' => 'sometimes|in:1',
                 'parent_id' => 'nullable|exists:categories,id',
-                'status' => 'nullable|in:active,inactive',
+                'status' => 'required|in:active,inactive',
             ]);
             
             $data = $request->all();
@@ -148,6 +148,33 @@ class CategoryController extends Controller
          }else {
             return back()->with('error', 'Category not found');
      }
+    }
+
+    public function getChildByParentId(Request $request,){
+        $category = Category::find($request->category_id);
+        
+        $mainCategory_id = $category->id;
+
+        if($category->id){
+           
+          $child_category_id = Category::getChildByParentId([$mainCategory_id]);
+
+        if($child_category_id->count() <= 0){
+            return response()->json([
+                'status' => false,
+                'data' => null,  
+                'msg' => ''
+            ]);
+        }
+            return response()->json(['status' => true, 'data' => $child_category_id,  'msg' => '']);
+        }else{
+            return response()->json([
+                'status' => false,
+                'data' => null,  
+                'msg' => 'Category not found'
+            ]);
+        }
+
     }
 
     /**
