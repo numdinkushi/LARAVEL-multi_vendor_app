@@ -63,17 +63,15 @@
                                     <div class="col-lg-6 col-md-12">
                                         <label for="">Status<span class="text-danger">*</span></label>
                                         <select  class="form-control show-tick">
-                                            <option value="active" >Active</option>
-                                            <option value="inactive" > Inactive</option>
+                                            <option value="banner" {{ old('status') == 'active' ? 'selected' : '' }}> Active</option>
+                                            <option value="banner" {{ old('status') == 'inactive' ? 'selected' : '' }}>Inactive</option>
                                         </select>
                                     </div>
                                     <div class="col-lg-6 col-md-12">
                                         <label for="">Condition</label>
                                         <select name="condition" class="form-control show-tick">
-                                            <option value="banner" {{ old('condition') == 'banner' ? 'selected' : '' }}>
-                                                Banner</option>
-                                            <option value="promo" {{ old('condition') == 'promo' ? 'selected' : '' }}>
-                                                Promotion</option>
+                                            <option value="banner" {{ old('condition') == 'banner' ? 'selected' : '' }}> Banner</option>
+                                            <option value="promo" {{ old('condition') == 'promo' ? 'selected' : '' }}> Promotion</option>
                                         </select>
                                     </div>
                                 </div>
