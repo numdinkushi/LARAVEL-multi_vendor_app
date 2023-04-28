@@ -5,6 +5,7 @@ use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,8 +43,12 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('brand', BrandController::class);
     Route::post('/brand_status', [App\Http\Controllers\BrandController::class, 'brandStatus'])->name('brand.status');
 
-      //product section
-      Route::resource('product', ProductController::class);
-      Route::post('/product_status', [App\Http\Controllers\ProductController::class, 'productStatus'])->name('product.status');
+    //product section
+    Route::resource('product', ProductController::class);
+    Route::post('/product_status', [App\Http\Controllers\ProductController::class, 'productStatus'])->name('product.status');
+
+    //User section
+    Route::resource('user', UserController::class);
+    Route::post('/user_status', [App\Http\Controllers\UserController::class, 'userStatus'])->name('user.status');
 });
 
