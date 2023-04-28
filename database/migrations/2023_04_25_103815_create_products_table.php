@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->mediumText('summary');
-            $table->mediumText('description');
+            $table->mediumText('description')->nullable();
             $table->integer('stock')->default(0);
-            $table->unsignedBigInteger('brand_id');
+            $table->unsignedBigInteger('brand_id')->nullable();
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('child_category_id')->nullable();
             $table->string('photo');
