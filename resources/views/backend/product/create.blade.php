@@ -189,6 +189,9 @@
         });
     </script>
      <script>
+        
+        let child_category_id = {{$product->child_category_id}};
+
         $('#category_id').change(function() {
            const category_id = $(this).val();
         if(category_id != null){
