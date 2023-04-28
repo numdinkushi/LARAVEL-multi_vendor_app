@@ -26,11 +26,14 @@ use Illuminate\Support\Facades\Route;
 
 //frontend
 Route::get('/', [IndexController::class, 'home'])->name('home');
+//product category
+Route::get('/product-category/{slug}/', [IndexController::class, 'productCategory'])->name('product.category');
 
 //end front end
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 //admin
 Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/', [AdminController::class, 'admin'])->name('admin');
