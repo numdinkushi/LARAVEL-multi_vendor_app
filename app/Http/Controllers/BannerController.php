@@ -97,6 +97,7 @@ class BannerController extends Controller
             $this->validate($request, [
                 'title' => 'string|required',
                 'description' => 'string|nullable',
+                'slug' => 'nullable|exists:banners,slug',
                 'photo' => 'required',
                 'condition' => 'nullable|in:banner,promo',
                 'status' => 'nullable|in:active,inactive',
