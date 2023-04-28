@@ -188,12 +188,12 @@
             $('#summary').summernote();
         });
     </script>
+
      <script>
-        
-        let child_category_id = {{$product->child_category_id}};
 
         $('#category_id').change(function() {
-           const category_id = $(this).val();
+            const category_id = $(this).val();
+
         if(category_id != null){
             $.ajax({
                 type: "POST",
@@ -203,10 +203,11 @@
                     category_id: category_id,
                 },
                 success: function(response) {
-
+                    console.log(response)
                     let html_option = "<option value=''>Select Child Category</option>";
 
                    if(response.status){
+
                         $('#child_category_div').removeClass('d-none');
 
                         $.each(response.data, function(id, title){
@@ -220,5 +221,8 @@
             })
         }
         });
+        if(child_category_id != null){
+            $('#category_id').change();
+        }
     </script>
 @endsection
