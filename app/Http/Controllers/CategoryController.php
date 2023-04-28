@@ -56,6 +56,7 @@ class CategoryController extends Controller
             $data['parent_id'] = null;
         } 
         $data['is_parent'] = $request->input('parent_id', 0);
+      
         $status = Category::create($data);
 
         if ($status) {
