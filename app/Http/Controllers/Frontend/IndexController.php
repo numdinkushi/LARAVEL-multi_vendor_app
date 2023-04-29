@@ -20,7 +20,8 @@ class IndexController extends Controller
 
     public function productCategory($slug)
     {
-       $category = Category::with('products')->where('slug', $slug)->first();
-       return $category;
+       $categories = Category::with('products')->where('slug', $slug)->first();
+    
+       return view('frontend.pages.product-category', compact(['categories']));
     }
 }
