@@ -40,14 +40,16 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {                
+        // return $request->all();
         $this->validate($request, [
             'title' => 'required|string',
             'summary' =>  'required|string',
-            'description' => 'string|nullable',
+            'description' => 'required',
             'stock' => 'nullable|numeric',
             'price' => 'required|numeric',
             'discount' => 'nullable|numeric',
             'photo' => 'required',
+            'brand_id' => 'required',
             'category_id' => 'required|exists:categories,id',
             'child_category_id' => 'nullable|exists:categories,id',
             'size' => 'nullable',
