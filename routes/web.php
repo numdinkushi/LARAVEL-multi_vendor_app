@@ -20,19 +20,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 //frontend
 Route::get('/', [IndexController::class, 'home'])->name('home');
 //product category
 Route::get('/product-category/{slug}/', [IndexController::class, 'productCategory'])->name('product.category');
 
+Route::get('/product-details/{slug}/', [IndexController::class, 'productDetails'])->name('product.details');
+
 //end front end
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //admin
 Route::prefix('admin')->middleware('auth')->group(function () {
