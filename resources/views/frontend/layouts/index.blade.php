@@ -181,7 +181,7 @@
                                         class="icofont-eye-alt"></i> Quick View</a>
                             </div>
 
-                            <p class="brand_name">{{\App\Models\Product::where('id', $new_product->brand_id)->value('title')}}</p>
+                            <p class="brand_name">{{\App\Models\Brand::where('id', $new_product->brand_id)->value('title')}}</p>
                             <a href="{{route('product.details', $new_product->slug)}}">{{$new_product->title}}</a>
                             <h6 class="product-price"><small><del class="text-danger">{{number_format($new_product->price), 2}}  </del> </small> {{number_format($new_product->offer_price), 2}} </h6>
                         </div>

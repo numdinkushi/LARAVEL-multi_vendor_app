@@ -29,12 +29,17 @@ class IndexController extends Controller
     public function productDetails($slug)
     {
 
-       $product = Product::where('slug', $slug)->first();
-    
+       $product = Product::with('related_products')->where('slug', $slug)->first();
+
         if($product){
               return view('frontend.pages.product.product-details', compact(['product']));
         } else {
             return 'Product details not found';
         }
+    }
+
+    public function userAuth()
+    {
+        return view('frontend.auth.auth');
     }
 }
