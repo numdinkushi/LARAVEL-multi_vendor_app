@@ -70,64 +70,8 @@
                         <!-- Nav -->
                         <div class="classynav">
                             <ul>
-                                <li><a href="#">Home</a>
-                                    <ul class="dropdown">
-                                        <li><a href="index-1.html">Home - 1</a></li>
-                                        <li><a href="index-2.html">Home - 2</a></li>
-                                        <li><a href="index-3.html">Home - 3</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">Shop</a>
-                                    <ul class="dropdown">
-                                        <li><a href="#">Shop Grid</a>
-                                            <ul class="dropdown">
-                                                <li><a href="shop-grid-left-sidebar.html">Shop Grid Left Sidebar</a>
-                                                </li>
-                                                <li><a href="shop-grid-right-sidebar.html">Shop Grid Right
-                                                        Sidebar</a></li>
-                                                <li><a href="shop-grid-top-sidebar.html">Shop Grid Top Sidebar</a>
-                                                </li>
-                                                <li><a href="shop-grid-no-sidebar.html">Shop Grid No Sidebar</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Shop List</a>
-                                            <ul class="dropdown">
-                                                <li><a href="shop-list-left-sidebar.html">Shop List Left Sidebar</a>
-                                                </li>
-                                                <li><a href="shop-list-right-sidebar.html">Shop List Right
-                                                        Sidebar</a></li>
-                                                <li><a href="shop-list-top-sidebar.html">Shop List Top Sidebar</a>
-                                                </li>
-                                                <li><a href="shop-list-no-sidebar.html">Shop List No Sidebar</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="product-details.html">Single Product</a></li>
-                                        <li><a href="cart.html">Cart</a></li>
-                                        <li><a href="#">Checkout</a>
-                                            <ul class="dropdown">
-                                                <li><a href="checkout-1.html">Login</a></li>
-                                                <li><a href="checkout-2.html">Billing</a></li>
-                                                <li><a href="checkout-3.html">Shipping Method</a></li>
-                                                <li><a href="checkout-4.html">Payment Method</a></li>
-                                                <li><a href="checkout-5.html">Review</a></li>
-                                                <li><a href="checkout-complate.html">Complate</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Account Page</a>
-                                            <ul class="dropdown">
-                                                <li><a href="my-account.html">- Dashboard</a></li>
-                                                <li><a href="order-list.html">- Orders</a></li>
-                                                <li><a href="downloads.html">- Downloads</a></li>
-                                                <li><a href="addresses.html">- Addresses</a></li>
-                                                <li><a href="account-details.html">- Account Details</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="wishlist.html">Wishlist</a></li>
-                                        <li><a href="compare.html">Compare</a></li>
-                                    </ul>
-                                </li>
+                                <li> <a href="{{route('home')}}">Home</a> </li>
+                                <li><a href="#">Shop</a> </li>
                                 <li><a href="#">Pages</a>
                                     <div class="megamenu">
                                         <ul class="single-mega cn-col-4">
@@ -277,11 +221,15 @@
                                 <img src="{{asset('frontend/img/bg-img/user.jpg')}}" alt="">
                             </div>
                             <ul class="user-meta-dropdown">
+                                @if(Auth::check() )
                                 <li class="user-title"><span>Hello,</span> Lim Sarah</li>
                                 <li><a href="my-account.html">My Account</a></li>
                                 <li><a href="order-list.html">Orders List</a></li>
                                 <li><a href="wishlist.html">Wishlist</a></li>
                                 <li><a href="login.html"><i class="icofont-logout"></i> Logout</a></li>
+                                @else
+                                <li><a href="{{route('user.auth')}}"><i class="icofont-logout"></i> Register/Login</a></li>
+                                @endif
                             </ul>
                         </div>
                     </div>

@@ -33,4 +33,8 @@ class Product extends Model
         return $this->belongsTo('\App\Models\Brand', 'category_id', 'id');
     }
 
+    public function related_products()
+    {
+        return $this->hasMany('\App\Models\Product', 'category_id', 'category_id')->where(['status' => 'active'])->limit(10);
+    }
 }

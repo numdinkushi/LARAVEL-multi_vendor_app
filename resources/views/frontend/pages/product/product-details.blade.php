@@ -400,19 +400,23 @@
                 </div>
             </div>
         </div>
+        @if($product->related_products->count() > 0)
         <div class="row">
             <div class="col-12">
                 <div class="you_make_like_slider owl-carousel">
                     <!-- Single Product -->
+                    @foreach($product->related_products as $related_product)
+                    @if($related_product->id != $product->id)
                     <div class="single-product-area">
                         <div class="product_image">
                             <!-- Product Image -->
-                            <img class="normal_img" src="img/product-img/new-1-back.png" alt="">
-                            <img class="hover_img" src="img/product-img/new-1.png" alt="">
-
+                            @php
+                            $photo = explode(',',$related_product->photo)
+                        @endphp
+                            <img class="normal_img" src="{{$photo[0]}}" alt="{{$related_product->title}}">
                             <!-- Product Badge -->
                             <div class="product_badge">
-                                <span>New</span>
+                                <span>{{$related_product->conditions}}</span>
                             </div>
 
                             <!-- Wishlist -->
@@ -438,301 +442,18 @@
                                 <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
                             </div>
 
-                            <p class="brand_name">Top</p>
-                            <a href="#">Boutique Silk Dress</a>
-                            <h6 class="product-price">$48.99</h6>
+                            <p class="brand_name">{{\App\Models\Brand::where('id', $related_product->brand_id)->value('title')}}</p>
+                            <a href="{{route('product.details', $related_product->slug)}}">{{$related_product->title}}</a>
+                            <h6 class="product-price"><small><del class="text-danger">{{number_format($related_product->price), 2}}  </del> </small> {{number_format($related_product->offer_price), 2}} </h6>
                         </div>
                     </div>
+                    @endif
+                    @endforeach
 
-                    <!-- Single Product -->
-                    <div class="single-product-area">
-                        <div class="product_image">
-                            <!-- Product Image -->
-                            <img class="normal_img" src="img/product-img/new-6.png" alt="">
-                            <img class="hover_img" src="img/product-img/new-6-back.png" alt="">
-
-                            <!-- Product Badge -->
-                            <div class="product_badge">
-                                <span>New</span>
-                            </div>
-
-                            <!-- Wishlist -->
-                            <div class="product_wishlist">
-                                <a href="wishlist.html"><i class="icofont-heart"></i></a>
-                            </div>
-
-                            <!-- Compare -->
-                            <div class="product_compare">
-                                <a href="compare.html"><i class="icofont-exchange"></i></a>
-                            </div>
-                        </div>
-
-                        <!-- Product Description -->
-                        <div class="product_description">
-                            <!-- Add to cart -->
-                            <div class="product_add_to_cart">
-                                <a href="#"><i class="icofont-shopping-cart"></i> Add to Cart</a>
-                            </div>
-
-                            <!-- Quick View -->
-                            <div class="product_quick_view">
-                                <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
-                            </div>
-
-                            <p class="brand_name">Lim</p>
-                            <a href="#">Gracia Plaid Dress</a>
-                            <h6 class="product-price">$17.63</h6>
-                        </div>
-                    </div>
-
-                    <!-- Single Product -->
-                    <div class="single-product-area">
-                        <div class="product_image">
-                            <!-- Product Image -->
-                            <img class="normal_img" src="img/product-img/new-2.png" alt="">
-                            <img class="hover_img" src="img/product-img/new-2-back.png" alt="">
-
-                            <!-- Product Badge -->
-                            <div class="product_badge">
-                                <span>New</span>
-                            </div>
-
-                            <!-- Wishlist -->
-                            <div class="product_wishlist">
-                                <a href="wishlist.html"><i class="icofont-heart"></i></a>
-                            </div>
-
-                            <!-- Compare -->
-                            <div class="product_compare">
-                                <a href="compare.html"><i class="icofont-exchange"></i></a>
-                            </div>
-                        </div>
-
-                        <!-- Product Description -->
-                        <div class="product_description">
-                            <!-- Add to cart -->
-                            <div class="product_add_to_cart">
-                                <a href="#"><i class="icofont-shopping-cart"></i> Add to Cart</a>
-                            </div>
-
-                            <!-- Quick View -->
-                            <div class="product_quick_view">
-                                <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
-                            </div>
-
-                            <p class="brand_name">Sarah</p>
-                            <a href="#">Flower Textured Dress</a>
-                            <h6 class="product-price">$24 <span>$49</span></h6>
-                        </div>
-                    </div>
-
-                    <!-- Single Product -->
-                    <div class="single-product-area">
-                        <div class="product_image">
-                            <!-- Product Image -->
-                            <img class="normal_img" src="img/product-img/new-4.png" alt="">
-                            <img class="hover_img" src="img/product-img/new-4-back.png" alt="">
-
-                            <!-- Product Badge -->
-                            <div class="product_badge">
-                                <span>New</span>
-                            </div>
-
-                            <!-- Wishlist -->
-                            <div class="product_wishlist">
-                                <a href="wishlist.html"><i class="icofont-heart"></i></a>
-                            </div>
-
-                            <!-- Compare -->
-                            <div class="product_compare">
-                                <a href="compare.html"><i class="icofont-exchange"></i></a>
-                            </div>
-                        </div>
-
-                        <!-- Product Description -->
-                        <div class="product_description">
-                            <!-- Add to cart -->
-                            <div class="product_add_to_cart">
-                                <a href="#"><i class="icofont-shopping-cart"></i> Add to Cart</a>
-                            </div>
-
-                            <!-- Quick View -->
-                            <div class="product_quick_view">
-                                <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
-                            </div>
-
-                            <p class="brand_name">Lim</p>
-                            <a href="#">Gracia Plaid Dress</a>
-                            <h6 class="product-price">$78.24</h6>
-                        </div>
-                    </div>
-
-                    <!-- Single Product -->
-                    <div class="single-product-area">
-                        <div class="product_image">
-                            <!-- Product Image -->
-                            <img class="normal_img" src="img/product-img/new-1-back.png" alt="">
-                            <img class="hover_img" src="img/product-img/new-1.png" alt="">
-
-                            <!-- Product Badge -->
-                            <div class="product_badge">
-                                <span>New</span>
-                            </div>
-
-                            <!-- Wishlist -->
-                            <div class="product_wishlist">
-                                <a href="wishlist.html"><i class="icofont-heart"></i></a>
-                            </div>
-
-                            <!-- Compare -->
-                            <div class="product_compare">
-                                <a href="compare.html"><i class="icofont-exchange"></i></a>
-                            </div>
-                        </div>
-
-                        <!-- Product Description -->
-                        <div class="product_description">
-                            <!-- Add to cart -->
-                            <div class="product_add_to_cart">
-                                <a href="#"><i class="icofont-shopping-cart"></i> Add to Cart</a>
-                            </div>
-
-                            <!-- Quick View -->
-                            <div class="product_quick_view">
-                                <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
-                            </div>
-
-                            <p class="brand_name">Top</p>
-                            <a href="#">Boutique Silk Dress</a>
-                            <h6 class="product-price">$48.99</h6>
-                        </div>
-                    </div>
-
-                    <!-- Single Product -->
-                    <div class="single-product-area">
-                        <div class="product_image">
-                            <!-- Product Image -->
-                            <img class="normal_img" src="img/product-img/new-6.png" alt="">
-                            <img class="hover_img" src="img/product-img/new-6-back.png" alt="">
-
-                            <!-- Product Badge -->
-                            <div class="product_badge">
-                                <span>New</span>
-                            </div>
-
-                            <!-- Wishlist -->
-                            <div class="product_wishlist">
-                                <a href="wishlist.html"><i class="icofont-heart"></i></a>
-                            </div>
-
-                            <!-- Compare -->
-                            <div class="product_compare">
-                                <a href="compare.html"><i class="icofont-exchange"></i></a>
-                            </div>
-                        </div>
-
-                        <!-- Product Description -->
-                        <div class="product_description">
-                            <!-- Add to cart -->
-                            <div class="product_add_to_cart">
-                                <a href="#"><i class="icofont-shopping-cart"></i> Add to Cart</a>
-                            </div>
-
-                            <!-- Quick View -->
-                            <div class="product_quick_view">
-                                <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
-                            </div>
-
-                            <p class="brand_name">Lim</p>
-                            <a href="#">Gracia Plaid Dress</a>
-                            <h6 class="product-price">$17.63</h6>
-                        </div>
-                    </div>
-
-                    <!-- Single Product -->
-                    <div class="single-product-area">
-                        <div class="product_image">
-                            <!-- Product Image -->
-                            <img class="normal_img" src="img/product-img/new-2.png" alt="">
-                            <img class="hover_img" src="img/product-img/new-2-back.png" alt="">
-
-                            <!-- Product Badge -->
-                            <div class="product_badge">
-                                <span>New</span>
-                            </div>
-
-                            <!-- Wishlist -->
-                            <div class="product_wishlist">
-                                <a href="wishlist.html"><i class="icofont-heart"></i></a>
-                            </div>
-
-                            <!-- Compare -->
-                            <div class="product_compare">
-                                <a href="compare.html"><i class="icofont-exchange"></i></a>
-                            </div>
-                        </div>
-
-                        <!-- Product Description -->
-                        <div class="product_description">
-                            <!-- Add to cart -->
-                            <div class="product_add_to_cart">
-                                <a href="#"><i class="icofont-shopping-cart"></i> Add to Cart</a>
-                            </div>
-
-                            <!-- Quick View -->
-                            <div class="product_quick_view">
-                                <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
-                            </div>
-
-                            <p class="brand_name">Sarah</p>
-                            <a href="#">Flower Textured Dress</a>
-                            <h6 class="product-price">$24 <span>$49</span></h6>
-                        </div>
-                    </div>
-
-                    <!-- Single Product -->
-                    <div class="single-product-area">
-                        <div class="product_image">
-                            <!-- Product Image -->
-                            <img class="normal_img" src="img/product-img/new-4.png" alt="">
-                            <img class="hover_img" src="img/product-img/new-4-back.png" alt="">
-
-                            <!-- Product Badge -->
-                            <div class="product_badge">
-                                <span>New</span>
-                            </div>
-
-                            <!-- Wishlist -->
-                            <div class="product_wishlist">
-                                <a href="wishlist.html"><i class="icofont-heart"></i></a>
-                            </div>
-
-                            <!-- Compare -->
-                            <div class="product_compare">
-                                <a href="compare.html"><i class="icofont-exchange"></i></a>
-                            </div>
-                        </div>
-
-                        <!-- Product Description -->
-                        <div class="product_description">
-                            <!-- Add to cart -->
-                            <div class="product_add_to_cart">
-                                <a href="#"><i class="icofont-shopping-cart"></i> Add to Cart</a>
-                            </div>
-
-                            <!-- Quick View -->
-                            <div class="product_quick_view">
-                                <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
-                            </div>
-
-                            <p class="brand_name">Lim</p>
-                            <a href="#">Gracia Plaid Dress</a>
-                            <h6 class="product-price">$78.24</h6>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
+        @endif
     </div>
 </section>
 <!-- Related Products Area -->

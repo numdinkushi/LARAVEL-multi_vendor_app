@@ -28,10 +28,8 @@ Route::get('/product-category/{slug}/', [IndexController::class, 'productCategor
 
 Route::get('/product-details/{slug}/', [IndexController::class, 'productDetails'])->name('product.details');
 
-Route::get('/user/auth', [IndexController::class, 'userAuth'])->name('user.auth');
-
 //end front end
-Auth::routes(['register' => 'false']);
+Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
