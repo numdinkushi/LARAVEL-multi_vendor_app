@@ -34,6 +34,7 @@ Route::post('/user/login', [IndexController::class, 'loginSubmit'])->name('login
 
 Route::post('/user/register', [IndexController::class, 'registerSubmit'])->name('register.submit');
 
+Route::get('/user/logout', [IndexController::class, 'userLogout'])->name('user.logout');
 
 
 //end front end

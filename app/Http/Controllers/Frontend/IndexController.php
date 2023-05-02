@@ -102,4 +102,12 @@ class IndexController extends Controller
         'password' => Hash::make($data['password']),    
        ]);
     }
+
+    public function userLogout()
+    {
+        Session::forget('user');
+        Auth::logout();
+        return redirect()->route('home')->with('success', 'Successfully logged out');
+
+    }
 }
