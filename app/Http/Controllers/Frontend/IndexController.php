@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Hash;
 
 class IndexController extends Controller
 {
@@ -67,5 +69,37 @@ class IndexController extends Controller
             }else{
                 return back()->with('error', 'Invalid Credentials');
             }
+    }
+    public function registerSubmit(Request $request)
+    {
+        $this->validate($request, [
+            'username' => 'nullable|string',
+            'full_name' => 'required|string',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'min:4|required|confirmed',
+
+        ]);
+
+        $data = $request->all();
+
+        $check = $this->create($data);
+
+        if($check){
+            return redirect()->route('home')->with('success', 'Successfully logged in');
+
+        }else{
+
+            return back()->with('error', 'Invalid Credentials');
+        }
+    }
+
+    private function create(array $data)
+    {
+       return User::create([
+        'full_name' => $data['full_name'],
+        'username' =>  $data['username'],
+        'email' =>  $data['email'],
+        'password' => Hash::make($data['password']),    
+       ]);
     }
 }

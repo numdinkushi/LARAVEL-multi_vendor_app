@@ -32,6 +32,9 @@ Route::get('/user/auth', [IndexController::class, 'userAuth'])->name('user.auth'
 
 Route::post('/user/login', [IndexController::class, 'loginSubmit'])->name('login.submit');
 
+Route::post('/user/register', [IndexController::class, 'registerSubmit'])->name('register.submit');
+
+
 
 //end front end
 Auth::routes(['register' => 'false']);
