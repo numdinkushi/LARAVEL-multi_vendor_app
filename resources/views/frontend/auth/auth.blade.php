@@ -25,12 +25,20 @@
                     <div class="login_form mb-50">
                         <h5 class="mb-3">Login</h5>
 
-                        <form action="my-account.html" method="post">
+                        <form action="{{route('login.submit')}}" method="post">
+                            @csrf
+                           
                             <div class="form-group">
                                 <input type="email" class="form-control" name="email" id="username" placeholder="Email or Username">
+                                @error('email')
+                                     <small class="text-danger"> {{$message}} </small>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                                @error('password')
+                                    <small class="text-danger"> {{$message}} </small>
+                                @enderror
                             </div>
                             <div class="form-check">
                                 <div class="custom-control custom-checkbox mb-3 pl-1">

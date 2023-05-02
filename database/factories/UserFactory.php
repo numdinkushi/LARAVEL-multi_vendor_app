@@ -25,7 +25,7 @@ class UserFactory extends Factory
             'phone' => fake()->phoneNumber,
             'address' => fake()->address,
             'photo' => fake()->imageUrl(60, 60),
-            'role' => fake()->randomElement(['admin', 'vendor', 'customer']),
+            'role' => fake()->randomElement(['admin', 'seller', 'customer']),
             'status' => fake()->randomElement(['active', 'inactive']),
             'remember_token' => Str::random(10),
         ];

@@ -23,13 +23,13 @@ class UsersTableSeeder extends Seeder
                 'role' => 'admin',
                 'status' => 'active',
             ],
-            //vendor
+            //seller
             [
-                'full_name' => 'Numdin Vendor',
-                'username' => 'Vendor',
-                'email' => 'vendor@gmail.com',
+                'full_name' => 'Numdin Seller',
+                'username' => 'Seller',
+                'email' => 'seller@gmail.com',
                 'password' => Hash::make(1111),
-                'role' => 'vendor',
+                'role' => 'seller',
                 'status' => 'active',
             ],
             //customer
