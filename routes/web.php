@@ -30,13 +30,16 @@ Route::get('/product-details/{slug}/', [IndexController::class, 'productDetails'
 
 Route::get('/user/auth', [IndexController::class, 'userAuth'])->name('user.auth');
 
+Route::post('/user/login', [IndexController::class, 'loginSubmit'])->name('login.submit');
+
+
 //end front end
 Auth::routes(['register' => 'false']);
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //admin
-Route::prefix('admin')->middleware('auth')->group(function () {
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [AdminController::class, 'admin'])->name('admin');
 
     //banner section
@@ -61,3 +64,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/user_status', [App\Http\Controllers\UserController::class, 'userStatus'])->name('user.status');
 });
 
+Route::prefix('seller')->middleware(['auth', 'admin'])->group(function () {
+    Route::get('/', [AdminController::class, 'admin'])->name('admin');
+
+});
