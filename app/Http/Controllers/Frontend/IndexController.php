@@ -48,7 +48,8 @@ class IndexController extends Controller
         return view('frontend.auth.auth');
     }
 
-    public function loginSubmit(Request $request){
+    public function loginSubmit(Request $request)
+    {
             $this->validate($request, [
                 'email' => 'required|email|exists:users,email',
                 'password' => 'required|min:4'
@@ -83,6 +84,10 @@ class IndexController extends Controller
         $data = $request->all();
 
         $check = $this->create($data);
+
+        Session::put($data['email']);
+
+        Auth::login($check);
 
         if($check){
             return redirect()->route('home')->with('success', 'Successfully logged in');
