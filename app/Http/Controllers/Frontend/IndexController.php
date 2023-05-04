@@ -33,7 +33,7 @@ class IndexController extends Controller
        if($request->sort != null){
 
            $sort = $request->sort;
-       } 
+       }
 
 
        if($categories == null){
@@ -47,23 +47,23 @@ class IndexController extends Controller
                 $products = Product::where(['status' => 'active', 'category_id' => $categories->id])->orderBy('offer_price', 'ASC')->paginate(12);
 
             }elseif($sort == 'priceDsc'){
-                
+
                 $products = Product::where(['status' => 'active', 'category_id' => $categories->id])->orderBy('offer_price', 'desc')->paginate(12);
 
             }elseif($sort == 'discAsc'){
-                
+
                 $products = Product::where(['status' => 'active', 'category_id' => $categories->id])->orderBy('price', 'ASC')->paginate(12);
 
             }elseif($sort == 'discDsc'){
-                
+
                 $products = Product::where(['status' => 'active', 'category_id' => $categories->id])->orderBy('price', 'desc')->paginate(12);
 
             }elseif($sort == 'titleAsc'){
-                
+
                 $products = Product::where(['status' => 'active', 'category_id' => $categories->id])->orderBy('title', 'ASC')->paginate(12);
 
             }elseif($sort == 'titleDsc'){
-                
+
                 $products = Product::where(['status' => 'active', 'category_id' => $categories->id])->orderBy('title', 'DESC')->paginate(12);
 
             }else{
@@ -74,6 +74,14 @@ class IndexController extends Controller
        }
 
        $route = 'product-category';
+
+       if($request->ajax()){
+
+            $view = view('frontend.layouts.single-product', compatc(['products']))->render();
+
+            return response()->json(['html' => $view]);
+
+       }
 
        return view('frontend.pages.product.product-category', compact(['categories', 'route', 'products']));
     }
