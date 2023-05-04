@@ -73,8 +73,8 @@
                                         <label for="">Vendor</label>
                                         <select name="vendor_id" class="form-control show-tick">
                                             <option value="">Select Vendor</option>
-                                            @foreach (\App\Models\User::where('role', 'vendor')->get() as $vendor)
-                                            <option value="{{$vendor->id}}" {{$vendor->id == $product->vendor_id ? 'selected' : ''}} >{{$vendor->full_name}}</option>
+                                            @foreach (\App\Models\User::where('role', 'seller')->get() as $seller)
+                                            <option value="{{$seller->id}}" {{$seller->id == $product->seller_id ? 'selected' : ''}} >{{$vendor->full_name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
