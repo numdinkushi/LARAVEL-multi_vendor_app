@@ -16,12 +16,14 @@ use Illuminate\Support\Facades\Hash;
 class IndexController extends Controller
 {
     public function home()
-    {
+    {        
+        $user = Auth::user();
+
         $banners = Banner::where(['status' => 'active', 'condition' => 'banner'])->orderBy('id')->limit('5')->get();
 
         $categories = Category::where(['status' => 'active', 'is_parent' => 1])->orderBy('id')->limit('20')->get();
 
-        return view('frontend.layouts.index', compact(['banners', 'categories']));
+        return view('frontend.layouts.index', compact(['banners', 'categories', 'user']));
     }
 
     public function productCategory(Request $request, $slug)
@@ -163,6 +165,36 @@ class IndexController extends Controller
        ]);
     }
 
+    public function userDashboard(){
+
+        $user = Auth::user();
+
+        return view('frontend.user.dashboard', compact(['user']));
+    }
+
+    public function userOrder()
+    {
+
+        $user = Auth::user();
+
+        return view('frontend.user.order', compact(['user']));
+    }
+
+    public function userAddress()
+    {
+
+        $user = Auth::user();
+
+        return view('frontend.user.address', compact(['user']));
+    }
+    
+    public function userAccount()
+    {
+
+        $user = Auth::user();
+
+        return view('frontend.user.account', compact(['user']));
+    }
     public function userLogout()
     {
         Session::forget('user');
@@ -170,4 +202,5 @@ class IndexController extends Controller
         return redirect()->route('home')->with('success', 'Successfully logged out');
 
     }
+
 }

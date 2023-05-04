@@ -72,3 +72,12 @@ Route::prefix('seller')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [AdminController::class, 'admin'])->name('admin');
 
 });
+
+//userDashboard
+
+Route::group(['prefix' => 'user'], function(){
+    Route::get('/dashboard', [IndexController::class, 'userDashboard'])->name('user.dashboard');
+    Route::get('/order', [IndexController::class, 'userOrder'])->name('user.order');
+    Route::get('/address', [IndexController::class, 'userAddress'])->name('user.address');
+    Route::get('/account-detail', [IndexController::class, 'userAccount'])->name('user.account');
+});

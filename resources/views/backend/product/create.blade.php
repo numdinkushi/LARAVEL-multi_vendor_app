@@ -69,11 +69,11 @@
                                         </select>
                                     </div>
                                     <div class="col-lg-6 col-md-12">
-                                        <label for="">Vendor</label>
+                                        <label for="">Seller</label>
                                         <select name="vendor_id" class="form-control show-tick">
-                                            <option value="">Select Vendor</option>
-                                            @foreach (\App\Models\User::where('role', 'vendor')->get() as $vendor)
-                                            <option value="{{$vendor->id}}" {{ old('vendor') == $vendor->id ? 'selected' : '' }}>{{$vendor->full_name}}</option>
+                                            <option value="">Seller</option>
+                                            @foreach (\App\Models\User::where('role', 'seller')->get() as $seller)
+                                            <option value="{{$seller->id}}" {{ old('seller') == $seller->id ? 'selected' : '' }}>{{$seller->full_name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
