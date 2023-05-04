@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Hash;
 class IndexController extends Controller
 {
     public function home()
-    {   
+    {
         $banners = Banner::where(['status' => 'active', 'condition' => 'banner'])->orderBy('id')->limit('5')->get();
 
         $categories = Category::where(['status' => 'active', 'is_parent' => 1])->orderBy('id')->limit('20')->get();
@@ -24,11 +24,66 @@ class IndexController extends Controller
         return view('frontend.layouts.index', compact(['banners', 'categories']));
     }
 
-    public function productCategory($slug)
+    public function productCategory(Request $request, $slug)
     {
        $categories = Category::with('products')->where('slug', $slug)->first();
-    
-       return view('frontend.pages.product.product-category', compact(['categories']));
+
+       $sort = '';
+
+       if($request->sort != null){
+
+           $sort = $request->sort;
+       }
+
+
+       if($categories == null){
+
+        return view('errors.404');
+
+       }else{
+
+            if($sort == 'priceAsc'){
+
+                $products = Product::where(['status' => 'active', 'category_id' => $categories->id])->orderBy('offer_price', 'ASC')->paginate(12);
+
+            }elseif($sort == 'priceDsc'){
+
+                $products = Product::where(['status' => 'active', 'category_id' => $categories->id])->orderBy('offer_price', 'desc')->paginate(12);
+
+            }elseif($sort == 'discAsc'){
+
+                $products = Product::where(['status' => 'active', 'category_id' => $categories->id])->orderBy('price', 'ASC')->paginate(12);
+
+            }elseif($sort == 'discDsc'){
+
+                $products = Product::where(['status' => 'active', 'category_id' => $categories->id])->orderBy('price', 'desc')->paginate(12);
+
+            }elseif($sort == 'titleAsc'){
+
+                $products = Product::where(['status' => 'active', 'category_id' => $categories->id])->orderBy('title', 'ASC')->paginate(12);
+
+            }elseif($sort == 'titleDsc'){
+
+                $products = Product::where(['status' => 'active', 'category_id' => $categories->id])->orderBy('title', 'DESC')->paginate(12);
+
+            }else{
+
+                $products = Product::where(['status' => 'active', 'category_id' => $categories->id])->paginate(12);
+
+            }
+       }
+
+       $route = 'product-category';
+
+       if($request->ajax()){
+
+            $view = view('frontend.layouts.single-product', compatc(['products']))->render();
+
+            return response()->json(['html' => $view]);
+
+       }
+
+       return view('frontend.pages.product.product-category', compact(['categories', 'route', 'products']));
     }
 
     public function productDetails($slug)
@@ -56,13 +111,13 @@ class IndexController extends Controller
             ]);
 
             if(Auth::attempt(['email' => $request->email, 'password' => $request->password, 'status' => 'active'])){
-                
+
                 Session::put('user', $request->email);
 
                 if(Session::get('url.intended')){
 
                     return Redirect::to(Session::get('url.intended'));
-                    
+
                 }else{
 
                     return redirect()->route('home')->with('success', 'succesfully logged in.');
@@ -104,7 +159,7 @@ class IndexController extends Controller
         'full_name' => $data['full_name'],
         'username' =>  $data['username'],
         'email' =>  $data['email'],
-        'password' => Hash::make($data['password']),    
+        'password' => Hash::make($data['password']),
        ]);
     }
 

@@ -21,3 +21,6 @@
         $('#alert').slideUp();
     }, 3000);
 </script>
+
+@
+@yield('scripts')
