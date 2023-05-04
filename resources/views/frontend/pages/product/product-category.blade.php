@@ -103,20 +103,22 @@
                             <a href="shop-list-left-sidebar.html" data-toggle="tooltip" data-placement="top" title="List View"><i class="icofont-listine-dots"></i></a>
                         </div>
                     </div>
-                    <select class="small right">
-                        <option selected>Short by Popularity</option>
-                        <option value="1">Short by Newest</option>
-                        <option value="2">Short by Sales</option>
-                        <option value="3">Short by Ratings</option>
+                    <select id="sortBy" class="small right">
+                        <option selected >Default Sort</option>
+                        <option value="priceAsc" {{old('sortBy') == 'priceAsc' ? 'selected' : ''}}>Price - Lower To Higher</option>
+                        <option value="priceDsc"  {{old('sortBy') == 'priceDsc' ? 'selected' : ''}} >Price - Higher To Lower</option>
+                        <option value="titleAsc" {{old('sortBy') == 'titleAsc' ? 'selected' : ''}} >Alphabetical Ascending</option>
+                        <option value="titleDsc" {{old('sortBy') == 'titleDsc' ? 'selected' : ''}} >Alphabetical Descending</option>
+                        <option value="discAsc" {{old('sortBy') == 'discAsc' ? 'selected' : ''}}>Discount - Lower To Higer</option>
+                        <option value="discDsc" {{old('sortBy') == 'discDsc' ? 'selected' : ''}}>Discount - Higher To Lower</option>
                     </select>
                 </div>
 
                 <div class="shop_grid_product_area">
                     <div class="row justify-content-center">
-                        <!-- Single Product -->
-                        {{-- {{dd($categories->products->count())}} --}}
-                        @if($categories->products->count() > 0  )
-                        @foreach ($categories->products as $category_product)    
+                      
+                        @if($products->count() > 0  )
+                        @foreach ($products as $category_product)
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                             <div class="single-product-area mb-30">
                                 <div class="product_image">
@@ -192,4 +194,14 @@
         </div>
     </div>
 </section>
+@endsection
+
+@section('scripts')
+<script>
+    $('#sortBy').change(function(){
+        let sort = $('#sortBy').val();
+
+        window.location = "{{url(''.$route.'')}}/{{$categories->slug}}?sort="+sort;
+    })
+</script>
 @endsection

@@ -5,7 +5,7 @@
     @if($banners->count() > 0)
     <section class="welcome_area">
         <div class="welcome_slides owl-carousel">
-                @foreach ($banners as $banner)  
+                @foreach ($banners as $banner)
                 <!-- Single Slide -->
                 <div class="single_slide bg-img" style="background-image: url({{$banner->photo}});">
                     <div class="container h-100">
@@ -127,7 +127,7 @@
     $new_products = \App\Models\Product::where(['status' => 'active', 'conditions' => 'new'])->orderBy('id', 'DESC')->limit('10')->get();
 @endphp
 
-@if ($new_products->count() > 0)    
+@if ($new_products->count() > 0)
 <!-- New Arrivals Area -->
 <section class="new_arrivals_area section_padding_100 clearfix">
     <div class="container">
