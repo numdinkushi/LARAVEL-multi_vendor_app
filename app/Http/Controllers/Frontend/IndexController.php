@@ -190,11 +190,16 @@ class IndexController extends Controller
     
     public function userAccount()
     {
-
         $user = Auth::user();
 
         return view('frontend.user.account', compact(['user']));
     }
+
+    public function billingAddress(Request $request, $id)
+    {
+        return $id;
+    }
+
     public function userLogout()
     {
         Session::forget('user');
