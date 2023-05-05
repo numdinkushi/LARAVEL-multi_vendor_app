@@ -27,11 +27,11 @@ return new class extends Migration
             $table->string('state')->nullable();
             $table->text('address')->nullable();
 
-            $table->string('scountry')->nullable();
-            $table->string('scity')->nullable();
-            $table->integer('spostcode')->nullable();
-            $table->string('sstate')->nullable();
-            $table->text('saddress')->nullable();
+            $table->string('shipping_country')->nullable();
+            $table->string('shipping_city')->nullable();
+            $table->integer('shipping_postcode')->nullable();
+            $table->string('shipping_state')->nullable();
+            $table->text('shipping_address')->nullable();
 
             $table->enum('role', ['admin', 'seller', 'customer'])->default('customer');
             $table->enum('status', ['active', 'inactive'])->default('active');

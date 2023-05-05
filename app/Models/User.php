@@ -31,11 +31,12 @@ class User extends Authenticatable
         'postcode',
         'state',
         'address',
-        'scountry',
-        'scity',
-        'spostcode',
-        'sstate',
-        'saddress'
+        
+        'shipping_country',
+        'shipping_city',
+        'shipping_postcode',
+        'shipping_state',
+        'shipping_address',
     ];
 
     /**

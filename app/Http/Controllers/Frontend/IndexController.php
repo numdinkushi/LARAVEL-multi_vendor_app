@@ -190,11 +190,45 @@ class IndexController extends Controller
     
     public function userAccount()
     {
-
         $user = Auth::user();
 
         return view('frontend.user.account', compact(['user']));
     }
+
+    public function billingAddress(Request $request, $id)
+    {
+        $user = User::where('id', $id)->update([
+            'country' => $request->country,
+            'city' => $request->city,
+            'postcode' => $request->postcode,
+            'address' => $request->address,
+            'state' => $request->state,
+        ]);
+
+        if($user){
+            return back()->with('success', 'Billing Address successfully updated');
+        }else{
+            return back()->with('error', 'Something went wrong');
+        }
+    }
+
+    public function shippingAddress(Request $request, $id)
+    {
+        $user = User::where('id', $id)->update([
+            'shipping_country' => $request->shipping_country,
+            'shipping_city' => $request->shipping_city,
+            'shipping_postcode' => $request->shipping_postcode,
+            'shipping_address' => $request->shipping_address,
+            'shipping_state' => $request->shipping_state,
+        ]);
+
+        if($user){
+            return back()->with('success', 'Shipping Address successfully updated');
+        }else{
+            return back()->with('error', 'Something went wrong');
+        }
+    }
+
     public function userLogout()
     {
         Session::forget('user');
