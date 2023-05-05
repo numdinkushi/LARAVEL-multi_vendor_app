@@ -197,7 +197,19 @@ class IndexController extends Controller
 
     public function billingAddress(Request $request, $id)
     {
-        return $id;
+        $user = User::where('id', $id)->update([
+            'country' => $request->country,
+            'city' => $request->city,
+            'postcode' => $request->postcode,
+            'address' => $request->address,
+            'state' => $request->state,
+        ]);
+
+        if($user){
+            return back()->with('success', 'Address successfully updated');
+        }else{
+            return back()->with('error', 'Something went wrong');
+        }
     }
 
     public function userLogout()

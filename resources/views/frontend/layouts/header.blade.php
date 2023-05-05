@@ -218,8 +218,13 @@
                         <!-- Account -->
                         <div class="account-area">
                             <div class="user-thumbnail">
-                                <img src="{{asset('frontend/img/bg-img/user.jpg')}}" alt="">
-                            </div>
+                                @if(Auth::user()->photo)
+                                    <img src="{{auth()->user()->photo}}" alt="">
+                                @else
+                                    <img src="{{Helper::userDefaultImage()}}" alt="">
+                                @endif
+
+                                </div>
                             <ul class="user-meta-dropdown">
                                 @php
                                  $user = Auth::user() 
