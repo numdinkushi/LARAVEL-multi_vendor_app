@@ -30,52 +30,61 @@
                 <div class="my-account-content mb-50">
                     <h5 class="mb-3">Account Details</h5>
 
-                    <form action="#" method="post">
+                    <form action="{{ route('update.account', $user?->id) }}" method="post">
+                        @csrf
                         <div class="row">
                             <div class="col-12 col-lg-6">
                                 <div class="form-group">
-                                    <label for="firstName">First Name *</label>
-                                    <input type="text" value="{{ $user->full_name }}"  class="form-control" name="full_name" id="firstName"  placeholder="Sam karl">
+                                    <label for="full_name">First Name *</label>
+                                    <input type="text" value="{{ $user->full_name }}"  class="form-control" name="full_name" id="full_name"  placeholder="Sam karl">
+                                    @error('full_name')
+                                        <p class="text-danger" >{{$message}}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-12 col-lg-6">
                                 <div class="form-group">
-                                    <label for="lastName">Username </label>
-                                    <input type="text" value="{{ $user->username }}"  class="form-control" id="lastName" name="username" placeholder="sammy">
+                                    <label for="username">Username </label>
+                                    <input type="text" value="{{ $user->username }}"  class="form-control" id="username" name="username" placeholder="sammy">
+                                    @error('username')
+                                    <p class="text-danger" >{{$message}}</p>
+                                @enderror
                                 </div>
                             </div>
 
                             <div class="col-12 col-lg-6">
                                 <div class="form-group">
-                                    <label for="firstName">Email</label>
-                                    <input type="text" value="{{ $user->email }}"  class="form-control" name="email" id="firstName"  placeholder="samkarak@gmail.com" disabled>
+                                    <label for="email">Email</label>
+                                    <input type="email" value="{{ $user->email }}"  class="form-control" name="email" id="email"  placeholder="samkarak@gmail.com" disabled>
                                 </div>
                             </div>
+
                             <div class="col-12 col-lg-6">
                                 <div class="form-group">
-                                    <label for="lastName">Phone </label>
-                                    <input type="text" value="{{ $user->phone }}"  class="form-control" id="phone" name="phone" placeholder="0812313xxxx">
+                                    <label for="phone">Phone </label>
+                                    <input type="number" value="{{ $user->phone }}"  class="form-control" id="phone" name="phone" placeholder="0812313xxxx">
                                 </div>
                             </div>
 
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="currentPass">Current Password (Leave blank to leave unchanged)</label>
-                                    <input type="password" class="form-control" id="currentPass">
+                                    <label for="currentPass">Current Password (Leave both passwords blank to leave unchanged)</label>
+                                    <input type="password" class="form-control" id="currentPass" name="old_password">
+                                    @error('old_password')
+                                    <p class="text-danger" >{{$message}}</p>
+                                @enderror
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="newPass">New Password (Leave blank to leave unchanged)</label>
-                                    <input type="password" class="form-control" id="newPass">
+                                    <label for="newPass">New Password (Leave both passwords blank to leave unchanged)</label>
+                                    <input type="password" class="form-control" id="newPass" name="new_password">
                                 </div>
+                                @error('new_password')
+                                <p class="text-danger" >{{$message}}</p>
+                            @enderror
                             </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="confirmPass">Confirm New Password</label>
-                                    <input type="password" class="form-control" id="confirmPass">
-                                </div>
-                            </div>
+                        
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary">Save Changes</button>
                             </div>

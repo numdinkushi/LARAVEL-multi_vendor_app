@@ -218,19 +218,20 @@
                         <!-- Account -->
                         <div class="account-area">
                             <div class="user-thumbnail">
-                                @if(Auth::user()->photo)
+                                @if(Auth::user()?->photo)
                                     <img src="{{auth()->user()->photo}}" alt="">
                                 @else
                                     <img src="{{Helper::userDefaultImage()}}" alt="">
                                 @endif
 
                                 </div>
-                            <ul class="user-meta-dropdown">
+                              <ul class="user-meta-dropdown">
                                 @php
-                                 $user = Auth::user() 
+                                $first_name = explode(' ',Auth::user()?->full_name)
                                 @endphp
+
                                 @if(Auth::check() )
-                                <li class="user-title"><span>Hello,</span> {{  $user->full_name }}</li>
+                                <li class="user-title"><span>Hello,</span> {{  $first_name[0] }}</li>
                                 <li><a href="{{ route('user.dashboard') }}">My Account</a></li>
                                 <li><a href="{{ route('user.order') }}">Orders List</a></li>
                                 <li><a href="wishlist.html">Wishlist</a></li>

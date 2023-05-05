@@ -81,5 +81,5 @@ Route::group(['prefix' => 'user'], function(){
     Route::get('/account-detail', [IndexController::class, 'userAccount'])->name('user.account');
     Route::post('/billing/address/{id}', [IndexController::class, 'billingAddress'])->name('billing.address');
     Route::post('/shipping/address/{id}', [IndexController::class, 'shippingAddress'])->name('shipping.address');
-
+    Route::post('/update-account/{id}', [IndexController::class, 'updateAccount'])->name('update.account');
 });

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Hash;
 class IndexController extends Controller
 {
     public function home()
-    {        
+    {
         $user = Auth::user();
 
         $banners = Banner::where(['status' => 'active', 'condition' => 'banner'])->orderBy('id')->limit('5')->get();
@@ -187,7 +187,7 @@ class IndexController extends Controller
 
         return view('frontend.user.address', compact(['user']));
     }
-    
+
     public function userAccount()
     {
         $user = Auth::user();
@@ -228,6 +228,62 @@ class IndexController extends Controller
             return back()->with('error', 'Something went wrong');
         }
     }
+
+    public function updateAccount(Request $request, $id)
+    {
+        // return ($request->all());
+           $user = $this->validate($request, [
+            'new_password' => 'nullable|min:4',
+            'old_password'=>  'nullable|min:4',
+            'full_name' =>  'required|string',
+            'username' => 'nullable|string',
+            'phone'   => 'nullable|min:8'
+        ]);
+
+        if($user['old_password'] != null){
+            $this->validate($request, [
+            'new_password' => 'required|min:4',
+            'old_password'=>  'nullable|min:4',
+            'full_name' =>  'required|string',
+            'username' => 'nullable|string',
+            'phone'   => 'nullable|min:8'
+            ]);
+        }
+
+        $hash_password = Auth::user()->password;
+
+        if($request->old_password == null && $request->new_password == null){
+
+             User::where('id', $id)->update([
+                'full_name' => $request->full_name,
+                'username' => $request->username,
+                'phone' => $request->phone,
+            ]);
+
+           return back()->with('success', 'Account successfully updated.');
+
+        }else{
+            if(\Hash::check($request->old_password, $hash_password)){
+
+                if(!\Hash::check($request->new_password, $hash_password)){
+
+                     User::where('id', $id)->update([
+                        'full_name' => $request->full_name,
+                        'username' => $request->username,
+                        'phone' => $request->phone,
+                        'password' => Hash::make($request->new_password)
+                    ]);
+
+                    return back()->with('success', 'Account successfully updated.');
+
+            }else{
+                return back()->with('error', 'New password cannot be the same as old password');
+            }
+        }else{
+            return back()->with('error', 'Old passwords do not match');
+        }
+     }
+  }
 
     public function userLogout()
     {
