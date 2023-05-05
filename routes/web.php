@@ -80,4 +80,6 @@ Route::group(['prefix' => 'user'], function(){
     Route::get('/address', [IndexController::class, 'userAddress'])->name('user.address');
     Route::get('/account-detail', [IndexController::class, 'userAccount'])->name('user.account');
     Route::post('/billing/address/{id}', [IndexController::class, 'billingAddress'])->name('billing.address');
+    Route::post('/shipping/address/{id}', [IndexController::class, 'shippingAddress'])->name('shipping.address');
+
 });

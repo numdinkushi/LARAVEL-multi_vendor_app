@@ -45,7 +45,13 @@
                             <div class="col-12 col-lg-6">
                                 <h6 class="mb-3">Shipping Address</h6>
                                 <address>
-                                    You have not set up this type of address yet.
+                                    <address>
+                                        {{ $user->shipping_address }} <br>
+                                        {{ $user->shipping_city }} <br>
+                                        {{ $user->shipping_postcode}} <br>
+                                        {{  $user->shipping_state }} <br>
+                                        {{ $user->shipping_country}} <br>
+                                    </address>
                                 </address>
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#shippingAddress" class="btn btn-primary btn-sm">Edit Shipping Address</a>
                             </div>
@@ -117,55 +123,45 @@
                      <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                  </div>
-                 <form action="" method="POST">
+                 <form action="{{ route('shipping.address', $user->id) }}" method="POST">
                     @csrf
                  <div class="modal-body">
                      <div class="row">
                          <div class="col-12">
                              <div class="form-group">
                                 <label for="country">Shipping Address</label>
-                                 <textarea name="address" class="form-control" id="address" cols="20" rows="2" placeholder="2B St. Peter's square' *" required>{{ $user?->address }}</textarea>
+                                 <textarea name="shipping_address" class="form-control" id="shipping_address" cols="20" rows="2" placeholder="2B St. Peter's square' *" value="{{$user->shipping_address}}" required>{{ $user?->address }}</textarea>
                              </div>
                          </div>
                          <div class="col-md-12">
                              <div class="form-group">
                                  <label for="country">Shipping Country</label>
-                                 <input type="text" class="form-control" name="country" id="country" placeholder="{{ $user?->country}}" required>
+                                 <input type="text" class="form-control" name="shipping_country" id="shipping_country" placeholder="Japan" value="{{ $user?->shipping_country}}" required>
                              </div>
                          </div>
                          <div class="col-md-12">
                              <div class="form-group">
-                                 <label for="postcode">Shipping Post code</label>
-                                 <input type="text" class="form-control" name="postcode" id="postcode" placeholder="12314TE" required>
+                                 <label for="shipping_postcode">Shipping Post code</label>
+                                 <input type="text" class="form-control" name="shipping_postcode" id="shipping_postcode" placeholder="1231" value="{{ $user?->shipping_postcode}}" required>
                              </div>
                          </div>
                          <div class="col-md-12">
                              <div class="form-group">
-                                 <label for="state">Shipping State</label>
-                                 <input type="text" class="form-control" name="state" id="state" placeholder="Alaska" required>
+                                 <label for="shipping_state">Shipping State</label>
+                                 <input type="text" class="form-control" name="shipping_state" id="shipping_state" placeholder="Alaska" value={{ $user?->shipping_state}} required>
                              </div>
                          </div>
                          <div class="col-md-12">
                              <div class="form-group">
-                                 <label for="city">Shipping City</label>
-                                 <input type="text" class="form-control" name="city" id="city" placeholder="Jos" required>
+                                 <label for="shipping_city">Shipping City</label>
+                                 <input type="text" class="form-control" name="shipping_city" id="shipping_city" placeholder="Jos" value={{ $user?->shipping_city}} required>
                              </div>
-                         </div>
-                         <div class="col-md-12">
-                             <div class="form-group">
-                                 <label for="postcode">Shipping Email</label>
-                                 <input type="email" class="form-control" name="email" id="email" placeholder="Your E-mail" required>
-                             </div>
-                         </div>
-                    
-                         <div class="col-12 text-center">
-                             <button type="submit" class="btn btn-primary w-100">Send Message</button>
                          </div>
                      </div>
                  </div>
                  <div class="modal-footer">
                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                     <button type="button" class="btn btn-primary">Understood</button>
+                     <button type="submit" class="btn btn-primary">Update Shipping Address</button>
                  </div>
              </form>
              </div>

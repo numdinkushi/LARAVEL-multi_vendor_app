@@ -206,7 +206,24 @@ class IndexController extends Controller
         ]);
 
         if($user){
-            return back()->with('success', 'Address successfully updated');
+            return back()->with('success', 'Billing Address successfully updated');
+        }else{
+            return back()->with('error', 'Something went wrong');
+        }
+    }
+
+    public function shippingAddress(Request $request, $id)
+    {
+        $user = User::where('id', $id)->update([
+            'shipping_country' => $request->shipping_country,
+            'shipping_city' => $request->shipping_city,
+            'shipping_postcode' => $request->shipping_postcode,
+            'shipping_address' => $request->shipping_address,
+            'shipping_state' => $request->shipping_state,
+        ]);
+
+        if($user){
+            return back()->with('success', 'Shipping Address successfully updated');
         }else{
             return back()->with('error', 'Something went wrong');
         }
