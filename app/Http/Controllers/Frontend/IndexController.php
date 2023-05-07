@@ -79,7 +79,7 @@ class IndexController extends Controller
 
        if($request->ajax()){
 
-            $view = view('frontend.layouts.single-product', compatc(['products']))->render();
+            $view = view('frontend.layouts.single-product', compact(['products']))->render();
 
             return response()->json(['html' => $view]);
 

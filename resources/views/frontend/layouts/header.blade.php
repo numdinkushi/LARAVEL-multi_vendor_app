@@ -1,4 +1,4 @@
-<header class="header_area">
+
     <!-- Top Header Area -->
     <div class="top-header-area">
         <div class="container h-100">
@@ -162,7 +162,7 @@
 
                         <!-- Cart -->
                         <div class="cart-area">
-                            <div class="cart--btn"><i class="icofont-cart"></i> <span class="cart_quantity">2</span>
+                            <div class="cart--btn"><i class="icofont-cart"></i> <span id="cart-counter" class="cart_quantity">{{ \Gloudemans\Shoppingcart\Facades\Cart::instance('shopping')->count() }}</span>
                             </div>
 
                             <!-- Cart Dropdown Content -->
@@ -246,4 +246,5 @@
             </div>
         </div>
     </div>
-</header>
+
+  

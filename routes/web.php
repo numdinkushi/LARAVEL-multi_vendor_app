@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
@@ -36,7 +37,8 @@ Route::post('/user/register', [IndexController::class, 'registerSubmit'])->name(
 
 Route::get('/user/logout', [IndexController::class, 'userLogout'])->name('user.logout');
 
-
+//cart section
+Route::post('cart/store', [CartController::class, 'cartStore'])->name('cart.store');
 //end front end
 Auth::routes(['register' => 'false']);
 

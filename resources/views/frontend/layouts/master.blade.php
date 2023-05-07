@@ -25,8 +25,10 @@
     </div>
 
     <!-- Header Area -->
-  @include('frontend.layouts.header')
-    <!-- Header Area End -->
+    <header class="header_area" id="header-ajax">
+        @include('frontend.layouts.header')
+    </header>
+        <!-- Header Area End -->
 
     <!-- Welcome Slides Area -->
     <div class="container"> 

@@ -1,4 +1,3 @@
-{{-- @if($products->count() > 0  ) --}}
 @foreach ($products as $category_product)
 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
     <div class="single-product-area mb-30">
@@ -28,7 +27,7 @@
         <div class="product_description">
             <!-- Add to cart -->
             <div class="product_add_to_cart">
-                <a href="#"><i class="icofont-shopping-cart"></i> Add to Cart</a>
+                <a href="#" data-quantity="1" data-product-id="{{ $category_product->id}}" class="add_to_cart" id="add_to_cart{{$category_product->id}}"><i class="icofont-shopping-cart"></i> Add to Cart</a>
             </div>
 
             <!-- Quick View -->
@@ -43,6 +42,4 @@
     </div>
 </div>
 @endforeach
-{{-- @else
-<div class="">No products found</div>
-@endif --}}
+
