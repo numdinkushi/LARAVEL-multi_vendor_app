@@ -149,35 +149,10 @@
                     <!-- Overview -->
                     <div class="short_overview mb-4">
                         <h6>Overview</h6>
-                        <p>{!! html_entity_decode($product->summary) !!} </p> 
+                        {{-- <p>{!! html_entity_decode($product->summary) !!} </p> --}}
                     </div>
 
-                    <!-- Color Option -->
-                    {{-- <div class="widget p-0 color mb-3">
-                        <h6 class="widget-title">Color</h6>
-                        <div class="widget-desc d-flex">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-                                <label class="custom-control-label black" for="customRadio1"></label>
-                            </div>
-                            <div class="custom-control custom-radio">
-                                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-                                <label class="custom-control-label pink" for="customRadio2"></label>
-                            </div>
-                            <div class="custom-control custom-radio">
-                                <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-                                <label class="custom-control-label red" for="customRadio3"></label>
-                            </div>
-                            <div class="custom-control custom-radio">
-                                <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
-                                <label class="custom-control-label purple" for="customRadio4"></label>
-                            </div>
-                            <div class="custom-control custom-radio">
-                                <input type="radio" id="customRadio5" name="customRadio" class="custom-control-input">
-                                <label class="custom-control-label white" for="customRadio5"></label>
-                            </div>
-                        </div>
-                    </div> --}}
+
 
                     <!-- Size Option -->
                     <div class="widget p-0 size mb-3">
@@ -249,7 +224,7 @@
                         <div role="tabpanel" class="tab-pane fade show active" id="description">
                             <div class="description_area">
                                 <h5>Description</h5>
-                                <p>{!! html_entity_decode($product->description) !!} </p> 
+                                <p>{!! html_entity_decode($product->description) !!} </p>
                             </div>
                         </div>
 

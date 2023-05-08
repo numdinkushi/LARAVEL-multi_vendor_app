@@ -146,7 +146,7 @@
             url: '?page='+page,
             type: 'get',
             beforeSend: function(){
-                $.('.ajax-load').show();
+                $('.ajax-load').show();
             },
         })
 
@@ -172,6 +172,57 @@
             page ++;
             loadMoreData(page);
         }
+    })
+</script>
+
+<script>
+    $(document).on('click', '.add_to_cart', function(e){
+        e.preventDefault();
+        let product_id = $(this).data('product-id');
+        let product_quantity = $(this).data('quantity');
+
+        let token = "{{ csrf_token() }}";
+        let path = "{{route('cart.store')}}";  
+
+        $.ajax({
+            url: path,
+            type: 'POST',
+            dataType: "JSON",
+            data: {
+                product_id : product_id,
+                product_quantity :  product_quantity,
+                "_token": token,
+            },
+
+            beforeSend : function (){
+                $('#add_to_cart'+product_id).html('<i class="fa fa-spinner fa-spin"></i>Loading...');
+            },
+            
+            complete : function(){
+                $('#add_to_cart'+product_id).html('<i class="icofont-shopping-cart"></i>Add to cart');
+              
+            },
+
+            success : function(data){
+                
+                if(data['status']){
+                    $('body #header-ajax').html(data['header']);
+                    $('body #cart_counter').html(data['cart_count']);
+                    
+                     swal({
+                    title: "Good job!",
+                    text: data['message'],
+                    icon: "success",
+                    button: "Ok",
+                    });
+                }
+            },
+
+            error : function(err){
+                console.log(err);
+            }
+        });
+
     })
 </script>
 @endsection
