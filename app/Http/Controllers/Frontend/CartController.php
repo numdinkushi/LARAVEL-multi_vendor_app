@@ -27,7 +27,9 @@ class CartController extends Controller
 
         }
       
-        $result = Cart::instance('shopping')->add($product_id, $product[0]['title'],$product_quantity,$price)->associate('\App\Model\Product');
+        $result = Cart::instance('shopping')->add($product_id, $product[0]['title'],$product_quantity,$price)->associate('\App\Models\Product');
+    
+        // dd($result);
 
         if($result){
             $response['status'] = true;

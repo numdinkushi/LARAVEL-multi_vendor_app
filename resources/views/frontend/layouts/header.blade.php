@@ -168,30 +168,25 @@
                             <!-- Cart Dropdown Content -->
                             <div class="cart-dropdown-content">
                                 <ul class="cart-list">
+                                    @foreach (\Gloudemans\Shoppingcart\Facades\Cart::instance('shopping')->content() as $cart_item) 
+                                    @php
+                                    $associated_product = \App\Models\Product::where('id', $cart_item->id) 
+
+                                    @endphp
                                     <li>
                                         <div class="cart-item-desc">
                                             <a href="#" class="image">
-                                                <img src="{{asset('frontend/img/product-img/top-1.png')}}" class="cart-thumb" alt="">
+                                                <img src="{{$associated_product->value('photo') }}" class="cart-thumb" alt="">
                                             </a>
+                                            
                                             <div>
-                                                <a href="#">Kid's Fashion</a>
-                                                <p>1 x - <span class="price">$32.99</span></p>
+                                                <a href="{{ route('product.details', $associated_product->value('slug')) }}">{{ $cart_item->name }}</a>
+                                                <p>{{ $cart_item->qty }} x - <span class="price">{{ number_format($cart_item->price, 2) }}</span></p>
                                             </div>
                                         </div>
                                         <span class="dropdown-product-remove"><i class="icofont-bin"></i></span>
                                     </li>
-                                    <li>
-                                        <div class="cart-item-desc">
-                                            <a href="#" class="image">
-                                                <img src="{{asset('frontend/img/product-img/best-4.png')}}" class="cart-thumb" alt="">
-                                            </a>
-                                            <div>
-                                                <a href="#">Headphone</a>
-                                                <p>2x - <span class="price">$49.99</span></p>
-                                            </div>
-                                        </div>
-                                        <span class="dropdown-product-remove"><i class="icofont-bin"></i></span>
-                                    </li>
+                                    @endforeach
                                 </ul>
                                 <div class="cart-pricing my-4">
                                     <ul>
