@@ -184,7 +184,7 @@
                                                 <p>{{ $cart_item->qty }} x - <span class="price">{{ number_format($cart_item->price, 2) }}</span></p>
                                             </div>
                                         </div>
-                                        <span class="dropdown-product-remove"><i class="icofont-bin"></i></span>
+                                        <span class="dropdown-product-remove cart_delete" data-id =  "{{$cart_item->rowId}}"><i class="icofont-bin"></i></span>
                                     </li>
                                     @endforeach
                                 </ul>
@@ -192,15 +192,15 @@
                                     <ul>
                                         <li>
                                             <span>Sub Total:</span>
-                                            <span>$822.96</span>
+                                            <span>{{ \Gloudemans\Shoppingcart\Facades\Cart::subtotal()}}</span>
                                         </li>
-                                        <li>
+                                        {{-- <li>
                                             <span>Shipping:</span>
                                             <span>$30.00</span>
-                                        </li>
+                                        </li> --}}
                                         <li>
                                             <span>Total:</span>
-                                            <span>$856.63</span>
+                                            <span>{{ \Gloudemans\Shoppingcart\Facades\Cart::subtotal()}}</span>
                                         </li>
                                     </ul>
                                 </div>

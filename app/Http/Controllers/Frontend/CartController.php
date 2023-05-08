@@ -46,4 +46,23 @@ class CartController extends Controller
 
         return json_encode($response);
     }
+
+    public function cartDelete(Request $request){
+
+        $id = $request->input('cart_id');
+
+        Cart::instance('shopping')->remove($id);
+
+        $response['status'] = true;
+        $response['message'] = 'Cart Successfully removed';
+        $response['total'] = Cart::subtotal();
+        $response['cart_count'] = Cart::instance('shopping')->count();
+
+        if($request->ajax()){
+            $header = view('frontend.layouts.header')->render();
+            $response['header'] = $header;
+        }
+
+        return json_encode($response);
+    }
 }

@@ -175,8 +175,6 @@
     })
 </script>
 
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
 <script>
     $(document).on('click', '.add_to_cart', function(e){
         e.preventDefault();
@@ -204,12 +202,13 @@
                 $('#add_to_cart'+product_id).html('<i class="icofont-shopping-cart"></i>Add to cart');
               
             },
+
             success : function(data){
-                console.log(data);
-
-                $('body #header-ajax').html(data['header']);
-
+                
                 if(data['status']){
+                    $('body #header-ajax').html(data['header']);
+                    $('body #cart_counter').html(data['cart_count']);
+                    
                      swal({
                     title: "Good job!",
                     text: data['message'],
@@ -217,6 +216,10 @@
                     button: "Ok",
                     });
                 }
+            },
+
+            error : function(err){
+                console.log(err);
             }
         });
 
