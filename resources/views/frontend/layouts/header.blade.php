@@ -171,7 +171,6 @@
                                     @foreach (\Gloudemans\Shoppingcart\Facades\Cart::instance('shopping')->content() as $cart_item)
                                     @php
                                     $associated_product = \App\Models\Product::where('id', $cart_item->id)
-
                                     @endphp
                                     <li>
                                         <div class="cart-item-desc">

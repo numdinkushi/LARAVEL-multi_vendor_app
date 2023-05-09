@@ -36,96 +36,30 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach (\Gloudemans\Shoppingcart\Facades\Cart::instance('shopping')->content() as $cart_item)
+                                @php
+                                $associated_product = \App\Models\Product::where('id', $cart_item->id)
+                                @endphp
                                 <tr>
                                     <th scope="row">
-                                        <i class="icofont-close"></i>
+                                        <i class="icofont-close cart_delete" data-id={{ $cart_item->rowId }}></i>
                                     </th>
                                     <td>
-                                        <img src="img/product-img/onsale-1.png" alt="Product">
+                                        <img src="{{$associated_product->value('photo') }}" class="cart-thumb" alt="">
                                     </td>
                                     <td>
-                                        <a href="#">Bluetooth Speaker</a>
+                                        <a href="{{ route('product.details', $associated_product->value('slug')) }}">{{ $cart_item->name }}</a>
                                     </td>
-                                    <td>$9</td>
-                                    <td>
-                                        <div class="quantity">
-                                            <input type="number" class="qty-text" id="qty2" step="1" min="1" max="99" name="quantity" value="1">
-                                        </div>
-                                    </td>
-                                    <td>$9</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <i class="icofont-close"></i>
-                                    </th>
-                                    <td>
-                                        <img src="img/product-img/onsale-2.png" alt="Product">
-                                    </td>
-                                    <td>
-                                        <a href="#">Roof Lamp</a>
-                                    </td>
-                                    <td>$11</td>
+                                    <td>{{ number_format($cart_item->price, 2) }}</td>
                                     <td>
                                         <div class="quantity">
-                                            <input type="number" class="qty-text" id="qty3" step="1" min="1" max="99" name="quantity" value="1">
+                                            <input type="number" class="qty-text" id="qty2" step="1" min="1" max="99" name="quantity" value="{{ $cart_item->qty }}">
                                         </div>
                                     </td>
-                                    <td>$11</td>
+                                    <td>{{ $cart_item->subtotal() }}</td>
                                 </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <i class="icofont-close"></i>
-                                    </th>
-                                    <td>
-                                        <img src="img/product-img/onsale-6.png" alt="Product">
-                                    </td>
-                                    <td>
-                                        <a href="#">Cotton T-shirt</a>
-                                    </td>
-                                    <td>$6</td>
-                                    <td>
-                                        <div class="quantity">
-                                            <input type="number" class="qty-text" id="qty4" step="1" min="1" max="99" name="quantity" value="1">
-                                        </div>
-                                    </td>
-                                    <td>$6</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <i class="icofont-close"></i>
-                                    </th>
-                                    <td>
-                                        <img src="img/product-img/onsale-4.png" alt="Product">
-                                    </td>
-                                    <td>
-                                        <a href="#">Water Bottle</a>
-                                    </td>
-                                    <td>$17</td>
-                                    <td>
-                                        <div class="quantity">
-                                            <input type="number" class="qty-text" id="qty5" step="1" min="1" max="99" name="quantity" value="1">
-                                        </div>
-                                    </td>
-                                    <td>$17</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <i class="icofont-close"></i>
-                                    </th>
-                                    <td>
-                                        <img src="img/product-img/onsale-5.png" alt="Product">
-                                    </td>
-                                    <td>
-                                        <a href="#">Alka Sliper</a>
-                                    </td>
-                                    <td>$13</td>
-                                    <td>
-                                        <div class="quantity">
-                                            <input type="number" class="qty-text" id="qty6" step="1" min="1" max="99" name="quantity" value="1">
-                                        </div>
-                                    </td>
-                                    <td>$13</td>
-                                </tr>
+                                @endforeach
+                            
                             </tbody>
                         </table>
                     </div>
@@ -178,4 +112,45 @@
     </div>
 </div>
 <!-- Cart Area End -->
+@endsection
+
+@section('scripts')
+<script >
+    $(document).on('click', '.cart_delete', function(e){
+       e.preventDefault();
+       let cart_id = $(this).data('id');
+
+       let token = "{{ csrf_token() }}";
+       let path = "{{route('cart.delete')}}";  
+
+       $.ajax({
+           url: path,
+           type: 'POST',
+           dataType: "JSON",
+           data: {
+               cart_id : cart_id,
+               "_token": token,
+           },
+
+           success : function(data){
+
+               $('body #header-ajax').html(data['header']);
+
+               if(data['status']){
+                    swal({
+                   title: "Good job!",
+                   text: data['message'],
+                   icon: "success",
+                   button: "Ok",
+                   });
+               }
+           },
+
+           error : function(err){
+               console.log(err);
+           }
+       });
+
+   })
+  </script>
 @endsection
