@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\ProductController;
@@ -38,10 +39,11 @@ Route::post('/user/register', [IndexController::class, 'registerSubmit'])->name(
 Route::get('/user/logout', [IndexController::class, 'userLogout'])->name('user.logout');
 
 //cart section
+Route::get('cart', [CartController::class, 'cart'])->name('cart');
 Route::post('cart/store', [CartController::class, 'cartStore'])->name('cart.store');
-
 Route::post('cart/delete', [CartController::class, 'cartDelete'])->name('cart.delete');
 //end front end
+
 Auth::routes(['register' => 'false']);
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -70,6 +72,10 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     //User section
     Route::resource('user', UserController::class);
     Route::post('/user_status', [App\Http\Controllers\UserController::class, 'userStatus'])->name('user.status');
+
+    //Coupon section
+    Route::resource('/coupon', CouponController::class);
+    Route::post('/coupon_status', [App\Http\Controllers\CouponController::class, 'couponStatus'])->name('coupon.status');
 });
 
 Route::prefix('seller')->middleware(['auth', 'admin'])->group(function () {

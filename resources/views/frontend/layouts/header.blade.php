@@ -168,9 +168,9 @@
                             <!-- Cart Dropdown Content -->
                             <div class="cart-dropdown-content">
                                 <ul class="cart-list">
-                                    @foreach (\Gloudemans\Shoppingcart\Facades\Cart::instance('shopping')->content() as $cart_item) 
+                                    @foreach (\Gloudemans\Shoppingcart\Facades\Cart::instance('shopping')->content() as $cart_item)
                                     @php
-                                    $associated_product = \App\Models\Product::where('id', $cart_item->id) 
+                                    $associated_product = \App\Models\Product::where('id', $cart_item->id)
 
                                     @endphp
                                     <li>
@@ -178,7 +178,7 @@
                                             <a href="#" class="image">
                                                 <img src="{{$associated_product->value('photo') }}" class="cart-thumb" alt="">
                                             </a>
-                                            
+
                                             <div>
                                                 <a href="{{ route('product.details', $associated_product->value('slug')) }}">{{ $cart_item->name }}</a>
                                                 <p>{{ $cart_item->qty }} x - <span class="price">{{ number_format($cart_item->price, 2) }}</span></p>
@@ -204,8 +204,9 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="cart-box">
-                                    <a href="checkout-1.html" class="btn btn-primary d-block">Checkout</a>
+                                <div class="cart-box d-flex justify-items-between">
+                                    <a href="{{ route('cart') }}" class="btn btn-success  mr-2">{{ __('Cart') }}</a>
+                                    <a href="checkout-1.html" class="btn btn-primary ">{{__('Checkout')}}</a>
                                 </div>
                             </div>
                         </div>
@@ -242,4 +243,3 @@
         </div>
     </div>
 
-  
