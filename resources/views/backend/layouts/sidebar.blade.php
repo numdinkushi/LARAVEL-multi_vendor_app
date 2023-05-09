@@ -69,8 +69,15 @@
                         </li>
                         <li><a href="javascript:void(0);" class="has-arrow"><i class="fas fa-cart-plus"></i><span>Manage Cart</span> </a>
                             <ul>
-                                <li><a href="departments.html">All Departments</a></li>
-                                <li><a href="add-departments.html">Add Departments</a></li>
+                                <li><a href="#">{{__('Manage Cart')}}</a></li>
+                                <li><a href="#">{{__('Add Cart')}}</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="javascript:void(0);" class="has-arrow"><i class="fas fa-cart-plus"></i><span>Manage Coupon</span> </a>
+                            <ul>
+                                <li><a href="{{ route('coupon.index') }}">{{__('Manage Coupon')}}</a></li>
+                                <li><a href="{{ route('coupon.create')}}">{{__('Add Coupon')}}</a></li>
                             </ul>
                         </li>
                         <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-control-pause"></i><span>Post Cateogory</span> </a>
@@ -86,7 +93,6 @@
                             </ul>
                         </li>
                         <li><a href="app-inbox.html"><i class="icon-layers"></i>Manage Order</a></li>
-                        <li><a href="app-inbox.html"><i class="icon-check"></i>Manage Coupon</a></li>
                         <li><a href="javascript:void(0);" class="has-arrow"><i class="fas fa-newspaper"></i><span>Manage Post</span> </a>
                             <ul>
                                 <li><a href="departments.html">All Departments</a></li>

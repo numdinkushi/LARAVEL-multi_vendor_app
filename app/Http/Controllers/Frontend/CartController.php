@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+    public function cart()
+    {
+        return view('frontend.pages.cart.index');
+    }
     public function cartStore(Request $request){
 
         $product_quantity = $request->input('product_quantity');
