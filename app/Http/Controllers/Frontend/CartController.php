@@ -30,9 +30,9 @@ class CartController extends Controller
             $cart_array[] = $item->id;
 
         }
-      
+
         $result = Cart::instance('shopping')->add($product_id, $product[0]['title'],$product_quantity,$price)->associate('\App\Models\Product');
-    
+
         // dd($result);
 
         if($result){
@@ -64,7 +64,45 @@ class CartController extends Controller
 
         if($request->ajax()){
             $header = view('frontend.layouts.header')->render();
+            // $cart_list = view('frontend.layouts.cart-lists')->render();
             $response['header'] = $header;
+            // $response['cart_list'] = $cart_list;
+        }
+
+        return json_encode($response);
+    }
+
+    public function cartUpdate(Request $request)
+    {
+        $this->validate($request, [
+            'product_qty' => 'required|numeric',
+
+        ]);
+
+        $rowId = $request->input('rowId');
+        $request_quantity = $request->input('product_qty');
+        $productQuantity = $request->input('productQuantity');
+
+        if($request_quantity > $productQuantity){
+            $message = 'Sorry, we currently do not have enough items in stock';
+            $response['status'] = false;
+        }elseif($request_quantity < 1){
+            $message = "You cannot add less than 1 quantity";
+            $response['status'] = false;
+        }else{
+            Cart::instance('shopping')->update($rowId, $request_quantity);
+            $message = "Quantity was updated successfully";
+            $response['status'] = true;
+        }
+
+        if($request->ajax()){
+            $header = view('frontend.layouts.header')->render();
+            $cart_list = view('frontend.layouts.cart-lists')->render();
+            $response['header'] = $header;
+            $response['cart_list'] = $cart_list;
+            $response['message'] = $message;
+            $response['total'] = Cart::subtotal();
+            $response['cart_count'] = Cart::instance('shopping')->count();
         }
 
         return json_encode($response);
