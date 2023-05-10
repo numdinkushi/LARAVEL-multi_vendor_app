@@ -42,6 +42,8 @@ Route::get('/user/logout', [IndexController::class, 'userLogout'])->name('user.l
 Route::get('cart', [CartController::class, 'cart'])->name('cart');
 Route::post('cart/store', [CartController::class, 'cartStore'])->name('cart.store');
 Route::post('cart/delete', [CartController::class, 'cartDelete'])->name('cart.delete');
+Route::post('cart/update', [CartController::class, 'cartUpdate'])->name('cart.update');
+
 //end front end
 
 Auth::routes(['register' => 'false']);
