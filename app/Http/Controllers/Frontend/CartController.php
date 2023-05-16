@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Coupon;
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
@@ -106,5 +107,26 @@ class CartController extends Controller
         }
 
         return json_encode($response);
+    }
+
+    public function addCoupon(Request $request)
+    {
+        $coupon = Coupon::where('code', $request->input('code'))->first();
+
+        if(!$coupon){
+
+            return back()->with('error', 'Ivalid Coupon Code. Try again.');
+        }
+
+        if($coupon){
+            $total_price = Cart::instance('shopping')->subtotal();
+           session()->put('coupon', [
+                'id' => $coupon->id,
+                'code' => $coupon->code,
+                'value' => $coupon->discount($total_price)
+           ]);
+           
+           return back()->with('success', 'Coupon successfully applied');
+        }
     }
 }

@@ -117,6 +117,7 @@ class CouponController extends Controller
         }
     }
 
+   
     /**
      * Remove the specified resource from storage.
      */

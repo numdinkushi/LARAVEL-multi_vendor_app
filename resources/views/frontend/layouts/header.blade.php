@@ -191,15 +191,18 @@
                                     <ul>
                                         <li>
                                             <span>Sub Total:</span>
-                                            <span>{{ \Gloudemans\Shoppingcart\Facades\Cart::subtotal()}}</span>
+                                            <span>${{ \Gloudemans\Shoppingcart\Facades\Cart::subtotal() }}</span>
+                                            
                                         </li>
-                                        {{-- <li>
-                                            <span>Shipping:</span>
-                                            <span>$30.00</span>
-                                        </li> --}}
                                         <li>
                                             <span>Total:</span>
-                                            <span>{{ \Gloudemans\Shoppingcart\Facades\Cart::subtotal()}}</span>
+                                            @if(session()->has('coupon'))
+                                                <span>$ {{ filter_var(\Gloudemans\Shoppingcart\Facades\Cart::subtotal(), FILTER_SANITIZE_NUMBER_INT) - (session('coupon')['value'])}}</span>
+                                                {{-- <span>{{  session('coupon')['value']}}</span> --}}
+
+                                            @else
+                                               <span>${{ \Gloudemans\Shoppingcart\Facades\Cart::subtotal()}}</span>
+                                            @endif
                                         </li>
                                     </ul>
                                 </div>
