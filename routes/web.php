@@ -44,6 +44,9 @@ Route::post('cart/store', [CartController::class, 'cartStore'])->name('cart.stor
 Route::post('cart/delete', [CartController::class, 'cartDelete'])->name('cart.delete');
 Route::post('cart/update', [CartController::class, 'cartUpdate'])->name('cart.update');
 
+//coupon section
+Route::post('cart/coupon-add', [CartController::class, 'addCoupon'])->name('coupon.add');
+
 //end front end
 
 Auth::routes(['register' => 'false']);
@@ -78,6 +81,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     //Coupon section
     Route::resource('/coupon', CouponController::class);
     Route::post('/coupon_status', [App\Http\Controllers\CouponController::class, 'couponStatus'])->name('coupon.status');
+
 });
 
 Route::prefix('seller')->middleware(['auth', 'admin'])->group(function () {

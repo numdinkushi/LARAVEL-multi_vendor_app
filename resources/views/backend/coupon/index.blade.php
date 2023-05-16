@@ -48,7 +48,7 @@
                                                     @if ($coupon->type == 'fixed')
                                                         <span class="badge badge-success"> {{ $coupon->type }}</span>
                                                     @else
-                                                        <span class="badge badge-primary"> {{ $coupon->fixed }}</span>
+                                                        <span class="badge badge-primary"> {{ $coupon->type }}</span>
                                                     @endif
                                                 </td>
                                                 <td>{{ $coupon->value }}</td>
