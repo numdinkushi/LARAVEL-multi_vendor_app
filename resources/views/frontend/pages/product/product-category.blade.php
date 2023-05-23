@@ -204,7 +204,6 @@
             },
 
             success : function(data){
-                
                 if(data['status']){
                     $('body #header-ajax').html(data['header']);
                     $('body #cart_counter').html(data['cart_count']);
@@ -213,6 +212,77 @@
                     title: "Good job!",
                     text: data['message'],
                     icon: "success",
+                    button: "Ok",
+                    });
+                }
+            },
+
+            error : function(err){
+                console.log(err);
+            }
+        });
+
+    })
+</script>
+{{-- Add to wishlist --}}
+<script>
+    $(document).on('click', '.add_to_wishlist', function(e){
+        e.preventDefault();
+        let product_id = $(this).data('id');
+        let product_quantity = $(this).data('wishlist-quantity');
+
+        let token = "{{ csrf_token() }}";
+        let path = "{{route('wishlist.store')}}";  
+
+        $.ajax({
+            url: path,
+            type: 'POST',
+            dataType: "JSON",
+            data: {
+                product_id : product_id,
+                product_quantity :  product_quantity,
+                "_token": token,
+            },
+
+            beforeSend : function (){
+                $('#add_to_wishlist_'+product_id).html('<i class="fa fa-spinner fa-spin">');
+            },
+            
+            complete : function(){
+                $('#add_to_wishlist_'+product_id).html('<i class="icofont-heart"></i>');
+              
+            },
+
+            success : function(data){
+                console.log(2222, data);
+
+                if(data['status']){
+                    $('body #header-ajax').html(data['header']);
+                    $('body #wishlist_counter').html(data['wishlist_count']);
+                    
+                    swal({
+                    title: "Good job!",
+                    text: data['message'],
+                    icon: "success",
+                    button: "Ok",
+                    });
+
+                }else if(data['present']){
+                    $('body #header-ajax').html(data['header']);
+                    $('body #wishlist_counter').html(data['wishlist_count']);
+
+                    swal({
+                    title: "Oops!",
+                    text: data['message'],
+                    icon: "warning",
+                    button: "Ok",
+                    });
+                   
+                }else{
+                    swal({
+                    title: "Sorry!",
+                    text: "You can't add that product",
+                    icon: "error",
                     button: "Ok",
                     });
                 }

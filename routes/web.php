@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
+use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -46,6 +47,12 @@ Route::post('cart/update', [CartController::class, 'cartUpdate'])->name('cart.up
 
 //coupon section
 Route::post('cart/coupon-add', [CartController::class, 'addCoupon'])->name('coupon.add');
+
+//wishlist section
+Route::get('wishlist', [WishlistController::class, 'wishlist'])->name('wishlist');
+Route::post('wishlist/store', [WishlistController::class, 'wishlistStore'])->name('wishlist.store');
+Route::post('wishlist/move-to-cart', [WishlistController::class, 'moveToCart'])->name('wishlist.move.cart');
+Route::post('wishlist/delete', [WishlistController::class, 'wishlistDelete'])->name('wishlist.delete');
 
 //end front end
 
