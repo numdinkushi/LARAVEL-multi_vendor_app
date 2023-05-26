@@ -67,10 +67,10 @@
                                 <li><a href="{{route('product.create')}}">Add Products</a></li>
                             </ul>
                         </li>
-                        <li><a href="javascript:void(0);" class="has-arrow"><i class="fas fa-cart-plus"></i><span>Manage Cart</span> </a>
+                        <li><a href="javascript:void(0);" class="has-arrow"><i class="fas fa-truck"></i><span>Manage Shipping</span> </a>
                             <ul>
-                                <li><a href="#">{{__('Manage Cart')}}</a></li>
-                                <li><a href="#">{{__('Add Cart')}}</a></li>
+                                <li><a href="{{ route('shipping.index')}}">{{__('Manage Shipping')}}</a></li>
+                                <li><a href="{{ route('shipping.create')}}">{{__('Add Shipping')}}</a></li>
                             </ul>
                         </li>
 
