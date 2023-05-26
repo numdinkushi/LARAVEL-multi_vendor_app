@@ -10,7 +10,6 @@ use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -93,10 +92,6 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     //Coupon section
     Route::resource('/coupon', CouponController::class);
     Route::post('/coupon_status', [App\Http\Controllers\CouponController::class, 'couponStatus'])->name('coupon.status');
-
-    //Shipping section
-    Route::resource('/shipping', ShippingController::class);
-    Route::post('/shipping_status', [App\Http\Controllers\ShippingController::class, 'shippingStatus'])->name('shipping.status');
 
 });
 

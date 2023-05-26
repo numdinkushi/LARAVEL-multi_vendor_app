@@ -52,7 +52,6 @@ class BannerController extends Controller
         } else {
             return back()->with('error', 'Something went wrong');
         }
-
     }
 
     /**
