@@ -17,8 +17,11 @@ class Order extends Model
         'total_amount',
         'coupon',
         'delivery_charge',
-
+        'payment_method',
+        'payment_status',
+        'condition',
         'quantity',
+
         'first_name',
         'last_name',
         'email',
