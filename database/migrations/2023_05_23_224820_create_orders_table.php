@@ -19,6 +19,9 @@ return new class extends Migration
             $table->float('sum_total')->default(0);
             $table->float('total_amount')->default(0);
             $table->float('coupon')->default(0)->nullable();
+            $table->string('payment_method')->default('cod');
+            $table->enum('payment_status', ['paid', 'unpaid'])->default('unpaid');
+            $table->enum('condition', ['pending', 'processing', 'delivered', 'caneclled'])->default('pending');
             $table->float('delivery_charge')->default(0)->nullable();
             $table->integer('quantity')->default(0);
 
@@ -33,7 +36,6 @@ return new class extends Migration
             $table->string('state');
             $table->integer('postcode');
             $table->mediumText('note');
-
 
             $table->string('shipping_first_name');
             $table->string('shipping_last_name');
