@@ -38,7 +38,6 @@
                             <table class="table table-bordered mb-30">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Edit</th>
                                         <th scope="col">Image</th>
                                         <th scope="col">Product</th>
                                         <th scope="col">Unit Price</th>
@@ -47,25 +46,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (  \Gloudemans\Shoppingcart\Facades\Cart::content() as $shopping_item )            
+                                    @foreach (  \Gloudemans\Shoppingcart\Facades\Cart::instance('shopping')->content() as $shopping_item )            
                                         <tr>
-                                            {{-- {{  \Illuminate\Support\Facades\Session::get('checkout')['first_name'] }} --}}
-                                            <th scope="row">
-                                                <a href="#" class="btn btn-primary"><i class="icofont-ui-edit"></i></a>
-                                            </th>
                                             <td>
-                                                <img src="img/product-img/onsale-1.png" alt="Product">
+                                                <img src="{{ $shopping_item->model->photo }}" alt="Product">
                                             </td>
                                             <td>
-                                                <a href="#">Bluetooth Speaker</a>
+                                                <a href="{{ route('product.details', $shopping_item->model->slug) }}">{{ $shopping_item->name }}</a>
                                             </td>
-                                            <td>$9</td>
+                                            <td>{{  number_format($shopping_item->price, 2) }}</td>
                                             <td>
-                                                <div class="quantity">
-                                                    <input type="number" class="qty-text" id="qty2" step="1" min="1" max="99" name="quantity" value="1">
-                                                </div>
+                                                {{ $shopping_item->qty}}
                                             </td>
-                                            <td>$9</td>
+                                            <td>{{ $shopping_item->subtotal}}</td>
                                         </tr>
                                     @endforeach
            
