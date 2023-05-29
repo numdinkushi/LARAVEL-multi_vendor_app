@@ -23,6 +23,16 @@ class CheckoutController extends Controller
     public function checkout1Store(Request $request)
     {
         // return $request->all();
+        $this->validate($request,[
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'email' => 'required|exists:users,email',
+            'phone' =>  'required|string',
+            'address' => 'required|string',
+            'city' => 'required|string',
+            'country' => 'nullable',
+
+        ]);
         Session::put('checkout', [
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -73,7 +83,7 @@ class CheckoutController extends Controller
             'payment_method' => 'required|string',
             'payment_status' => 'in:paid,unpaid'
         ]);
-        
+
         Session::push('checkout', [
             'payment_method' => $request->payment_method,
             'payment_status' => 'paid',
@@ -127,8 +137,21 @@ class CheckoutController extends Controller
 
         $status = $order->save();
 
-        // if($status){
-        //     return redirect()->route('')
-        // }
+        if($status){
+            Session::forget('coupon');
+            Session::forget('checkout');
+
+            return redirect()->route('complete', $order['order_number']);
+        }else{
+
+            return redirect()->route('checkout1')->with('error', 'Something went wrong, Try again');
+        }
+    }
+
+    public function complete($order)
+    {
+        $order = $order;
+
+        return view('frontend.pages.checkout.complete', compact('order'));
     }
 }
