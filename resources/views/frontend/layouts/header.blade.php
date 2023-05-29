@@ -170,7 +170,8 @@
                                 <ul class="cart-list">
                                     @foreach (\Gloudemans\Shoppingcart\Facades\Cart::instance('shopping')->content() as $cart_item)
                                     @php
-                                    $associated_product = \App\Models\Product::where('id', $cart_item->id)
+                                    $associated_product = \App\Models\Product::where('id', $cart_item->id);
+                                    // dd($associated_product);
                                     @endphp
                                     <li>
                                         <div class="cart-item-desc">

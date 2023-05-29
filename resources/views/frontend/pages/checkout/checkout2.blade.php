@@ -55,7 +55,7 @@
                                                     <td>{{ number_format($shipping_item->delivery_charge, 2) }}</td>
                                                     <td>
                                                         <div class="custom-control custom-radio">
-                                                            <input type="radio" id="customRadio{{$key}}" name="delivery_charge" value="{{ $shipping_item->delivery_charge }}" class="custom-control-input">
+                                                            <input type="radio" id="customRadio{{$key}}" name="delivery_charge" value="{{ $shipping_item->delivery_charge }}" required class="custom-control-input">
                                                             <label class="custom-control-label" for="customRadio{{$key}}"></label>
                                                         </div>
                                                     </td>
@@ -75,7 +75,9 @@
                 <div class="col-12">
                     <div class="checkout_pagination mt-3 d-flex justify-content-end clearfix">
                         <a href="{{ route('checkout1') }}" class="btn btn-primary mt-2 ml-2">Go Back</a>
+                        @if($shippings->count() > 0)
                         <button type="submit" class="btn btn-primary mt-2 ml-2">Continue</button>
+                        @endif
                     </div>
                 </div>
             </form>

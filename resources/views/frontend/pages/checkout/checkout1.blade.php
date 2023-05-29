@@ -40,11 +40,11 @@
                                     @endphp
                                     <div class="col-md-6 mb-3">
                                         <label for="first_name">First Name</label>
-                                        <input type="text" class="form-control" id="first_name" placeholder="First Name" value="{{ $full_name[0]}}" required>
+                                        <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name" value="{{ $full_name[0]}}" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="last_name">Last Name</label>
-                                        <input type="text" class="form-control" id="last_name" placeholder="Last Name" value="{{ $full_name[1] }}" required>
+                                        <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name" value="{{ $full_name[1] }}" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="email_address">Email Address</label>
@@ -62,6 +62,9 @@
                                         <label for="street_address">Street address</label>
                                         <input type="text" class="form-control" id="address" name="address" placeholder="Street Address" value="{{ $user->address }}">
                                     </div>
+                                    <div class="col-md-12 mb-3">
+                                        <input type="hidden" class="form-control" id="street" name="street" placeholder="Stree" value="{{ $user->address }}">
+                                    </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="city">Town/City</label>
                                         <input type="text" class="form-control" id="city" placeholder="Town/City" name="city" value="{{ $user->city}}">
@@ -76,7 +79,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <label for="order-notes">Order Notes</label>
-                                        <textarea class="form-control" id="order-notes" cols="30" rows="10" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                        <textarea class="form-control" id="order-notes" name="note" cols="30" rows="10" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
                                     </div>
                                 </div>
 
@@ -107,11 +110,14 @@
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="country">Country</label>
-                                            <input type="text" class="form-control" id="shipping_country" placeholder="Nigeria" name="shipping_country" value="{{ $user->shipping_country }}">
+                                            <input type="text" class="form-control" id="shipping_country" name="shipping_country" placeholder="Nigeria" name="shipping_country" value="{{ $user->shipping_country }}">
                                         </div>
                                         <div class="col-md-12 mb-3">
                                             <label for="street_address">Street address</label>
                                             <input type="text" class="form-control" id="shipping_address" name="shipping_address" placeholder="Street Address" value="{{ $user->shipping_address }}">
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <input type="hidden" class="form-control" id="shipping_street" name="shipping_street" placeholder="Street" value="{{ $user->address }}">
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="city">Town/City</label>
@@ -129,8 +135,10 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="col-12">
+                            <input type="hidden" name="sub_total" value="{{  \Gloudemans\Shoppingcart\Facades\Cart::instance('shopping')->subtotal() }}">
+                            <input type="hidden" name="total_amount" value="{{  \Gloudemans\Shoppingcart\Facades\Cart::instance('shopping')->subtotal() }}">
                             <div class="checkout_pagination d-flex justify-content-end mt-50">
                                 <a href="{{ route('cart') }}" class="btn btn-primary mt-2 ml-2">Go Back</a>
                                 <button type="submit" href="" class="btn btn-primary mt-2 ml-2">Continue</button>
@@ -157,6 +165,7 @@
                 $('#shipping_postcode').val($('#postcode').val());
                 $('#shipping_state').val($('#state').val());
                 $('#shipping_address').val($('#address').val());
+                $('#shipping_street').val($('#shipping_street').val());
             }else{
                 $('#shipping_phone').val("");
                 $('#shipping_last_name').val("");
@@ -168,6 +177,8 @@
                 $('#shipping_postcode').val("");
                 $('#shipping_state').val("");
                 $('#shipping_address').val("");
+                $('#shipping_street').val("");
+                
 
             }
         });
