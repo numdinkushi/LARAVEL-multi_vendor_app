@@ -61,7 +61,6 @@ Route::get('checkout1', [CheckoutController::class, 'checkout1'])->name('checkou
 Route::post('checkout-first', [CheckoutController::class, 'checkout1Store'])->name('checkout1.store');
 Route::post('checkout-second', [CheckoutController::class, 'checkout2Store'])->name('checkout2.store');
 Route::post('checkout-third', [CheckoutController::class, 'checkout3Store'])->name('checkout3.store');
-Route::get('checkout-store', [CheckoutController::class, 'checkoutStore'])->name('checkout.store');
 
 
 //end front end

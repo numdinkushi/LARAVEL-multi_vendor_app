@@ -129,7 +129,7 @@
                                                 <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_four" aria-expanded="false" aria-controls="collapse_four"><i class="icofont-file-document"></i> Cheque Payment
                                                 </a>
                                             </h6>
-                                            <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                            <input type="checkbox"  class="custom-control-input" id="customCheck1">
                                         </div>
                                         <div aria-expanded="false" id="collapse_four" class="panel-collapse collapse" role="tabpanel" aria-labelledby="four">
                                             <div class="panel-body">

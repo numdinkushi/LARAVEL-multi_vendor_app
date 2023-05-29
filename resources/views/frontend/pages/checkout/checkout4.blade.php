@@ -46,7 +46,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (  \Gloudemans\Shoppingcart\Facades\Cart::instance('shopping')->content() as $shopping_item )            
+                                    @foreach (  \Gloudemans\Shoppingcart\Facades\Cart::instance('shopping')->content() as $shopping_item )
                                         <tr>
                                             <td>
                                                 <img src="{{ $shopping_item->model->photo }}" alt="Product">
@@ -61,7 +61,7 @@
                                             <td>{{ $shopping_item->subtotal}}</td>
                                         </tr>
                                     @endforeach
-           
+
                                 </tbody>
                             </table>
                         </div>
@@ -82,7 +82,7 @@
                                 <tr>
                                     <td>Shipping</td>
                                     <td>$
-                                        {{ number_format( \Illuminate\Support\Facades\Session::get('checkout')[0]['delivery_charge'], 2) }} 
+                                        {{ number_format( \Illuminate\Support\Facades\Session::get('checkout')[0]['delivery_charge'], 2) }}
                                     </td>
                                 </tr>
                                 @if(\Illuminate\Support\Facades\Session::has('coupon'))
@@ -107,7 +107,7 @@
                     </div>
                     <div class="checkout_pagination d-flex justify-content-end mt-3">
                         <a href="checkout-4.html" class="btn btn-primary mt-2 ml-2 d-none d-sm-inline-block">Go Back</a>
-                        <a href="checkout-complate.html" class="btn btn-primary mt-2 ml-2">Confirm</a>
+                        <a href="{{ route('checkout.store') }}" class="btn btn-primary mt-2 ml-2">Confirm</a>
                     </div>
                 </div>
             </div>
