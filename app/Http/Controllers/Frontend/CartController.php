@@ -7,6 +7,7 @@ use App\Models\Coupon;
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
@@ -120,6 +121,7 @@ class CartController extends Controller
 
         if($coupon){
             $total_price = Cart::instance('shopping')->subtotal();
+            
            session()->put('coupon', [
                 'id' => $coupon->id,
                 'code' => $coupon->code,

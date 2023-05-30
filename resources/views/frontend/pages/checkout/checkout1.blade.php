@@ -29,6 +29,21 @@
         <div class="checkout_area section_padding_100">
             <div class="container">
                 <div class="row">
+                    <div class="col-12">
+                        @if ($errors->any())
+                            <div class="alert alert-danger" >
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>
+                                            {{$error}}
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+                <div class="row">
                     <form action="{{ route('checkout1.store') }}" method="post">
                     <div class="col-12">
                         <div class="checkout_details_area clearfix">
@@ -178,7 +193,7 @@
                 $('#shipping_state').val("");
                 $('#shipping_address').val("");
                 $('#shipping_street').val("");
-                
+
 
             }
         });

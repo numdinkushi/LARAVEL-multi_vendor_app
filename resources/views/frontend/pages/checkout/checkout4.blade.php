@@ -93,12 +93,29 @@
                                 @endif
                                 <tr>
                                     <td>Total</td>
-                                    @if(\Illuminate\Support\Facades\Session::has('coupon'))
-                                    <td>{{ number_format(\Illuminate\Support\Facades\Session::get('coupon')['value'], 2) }}</td>
-                                    @elseif(  number_format( \Illuminate\Support\Facades\Session::get('checkout')[0]['delivery_charge'], 2))
-                                    <td>$   {{ number_format( (float) str_replace(',','',\Gloudemans\Shoppingcart\Facades\Cart::subtotal()) + (\Illuminate\Support\Facades\Session::get('checkout')[0]['delivery_charge']), 2)}}</td>
-                                    @elseif( \Illuminate\Support\Facades\Session::has('coupon') && number_format( \Illuminate\Support\Facades\Session::get('checkout')[0]['delivery_charge'], 2))
-                                    <td>$   {{ number_format( (float) str_replace(',','',\Gloudemans\Shoppingcart\Facades\Cart::subtotal()) + (\Illuminate\Support\Facades\Session::get('checkout')[0]['delivery_charge']) - number_format(\Illuminate\Support\Facades\Session::get('coupon')['value']), 2)}}</td>
+                                    {{-- @php
+                                        $has_coupon =  \Illuminate\Support\Facades\Session::has('coupon');
+                                        $coupon_value = number_format(\Illuminate\Support\Facades\Session::get('coupon')['value'], 2);
+                                        $delivery_charge_value = number_format( \Illuminate\Support\Facades\Session::get('checkout')[0]['delivery_charge'], 2);
+                                        $sub_total = number_format( (float) str_replace(',','',\Gloudemans\Shoppingcart\Facades\Cart::subtotal()), 2);
+                                    @endphp --}}
+                                      {{-- @if($has_coupon && !$delivery_charge_value)
+                                      <td>{{ $sub_total - $coupon_value  }}</td>
+                                     @elseif(!$has_coupon &&  $delivery_charge_value)
+                                     <td>{{ $sub_total  + $delivery_charge_value}}</td>
+                                     @elseif($has_coupon && $delivery_charge_value)
+                                     <td>$  {{ $sub_total + $delivery_charge_value  - $coupon_value}}</td>
+                                     @else
+                                     <td>$   {{ $sub_total }}</td>
+                                     @endif --}}
+                                    @if(\Illuminate\Support\Facades\Session::has('coupon') && !number_format( \Illuminate\Support\Facades\Session::get('checkout')[0]['delivery_charge'], 2))
+                                     <td>{{ number_format( (float) str_replace(',','',\Gloudemans\Shoppingcart\Facades\Cart::subtotal()) - number_format(\Illuminate\Support\Facades\Session::get('coupon')['value']), 2 ) }}</td>
+                                    @elseif(!\Illuminate\Support\Facades\Session::has('coupon') && number_format( \Illuminate\Support\Facades\Session::get('checkout')[0]['delivery_charge'], 2))
+                                    <td>{{ number_format( (float) str_replace(',','',\Gloudemans\Shoppingcart\Facades\Cart::subtotal()) + number_format( \Illuminate\Support\Facades\Session::get('checkout')[0]['delivery_charge'], 2), 2) }}</td>
+                                    @elseif(  number_format( \Illuminate\Support\Facades\Session::get('checkout')[0]['delivery_charge'], 2) &&  \Illuminate\Support\Facades\Session::has('coupon'))
+                                    <td>$  {{ number_format( (float) str_replace(',','',\Gloudemans\Shoppingcart\Facades\Cart::subtotal()) + number_format( \Illuminate\Support\Facades\Session::get('checkout')[0]['delivery_charge'], 2) - number_format(\Illuminate\Support\Facades\Session::get('coupon')['value']), 2 )}}</td>
+                                    @else
+                                    <td>$   {{ number_format( (float) str_replace(',','',\Gloudemans\Shoppingcart\Facades\Cart::subtotal()), 2)}}</td>
                                     @endif
                                 </tr>
 

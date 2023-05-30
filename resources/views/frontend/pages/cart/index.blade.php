@@ -54,12 +54,14 @@
                                     <td>Sub Total</td>
                                     <td>{{ \Gloudemans\Shoppingcart\Facades\Cart::subtotal()}}</td>
                                 </tr>
-                                <tr>
+                                {{-- <tr>
                                     <td>Shipping</td>
-                                    <td>$10.00</td>
-                                </tr>
+                                    <td>$
+                                        {{ number_format( \Illuminate\Support\Facades\Session::get('checkout')[0]['delivery_charge'], 2) }}
+                                    </td>
+                                </tr> --}}
                                 <tr>
-                                    <td>Save Amount</td>
+                                    <td>Save Amount(Coupon)</td>
                                     <td>$
                                             @if(session()->has('coupon'))
                                                  {{  number_format(\Illuminate\Support\Facades\Session::get('coupon')['value']) }}
@@ -72,17 +74,22 @@
                                     <td>Total </td>
                                     <td>$
                                         @if(session()->has('coupon') && \Gloudemans\Shoppingcart\Facades\Cart::subtotal() > 0)
-                                        {{ number_format( (float) str_replace(',','',\Gloudemans\Shoppingcart\Facades\Cart::subtotal()) - number_format(\Illuminate\Support\Facades\Session::get('coupon')['value']), 2 )
+                                        {{
+                                        // number_format( (float) str_replace(',','',\Gloudemans\Shoppingcart\Facades\Cart::subtotal()) + number_format( \Illuminate\Support\Facades\Session::get('checkout')[0]['delivery_charge'], 2) - number_format(\Illuminate\Support\Facades\Session::get('coupon')['value']), 2 )
+                                        number_format( (float) str_replace(',','',\Gloudemans\Shoppingcart\Facades\Cart::subtotal())  - number_format(\Illuminate\Support\Facades\Session::get('coupon')['value']), 2 )
+
                                     }}
                                    @else
-                                        0
+                                        {{ number_format( (float) str_replace(',','',\Gloudemans\Shoppingcart\Facades\Cart::subtotal())) }}
                                    @endif
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <a href="{{  route('checkout1') }}" class="btn btn-primary d-block">Proceed To Checkout</a>
+                    @if(\Gloudemans\Shoppingcart\Facades\Cart::instance('shopping')->count() >0)
+                         <a href="{{  route('checkout1') }}" class="btn btn-primary d-block">Proceed To Checkout</a>
+                     @endif
                 </div>
             </div>
         </div>

@@ -58,7 +58,7 @@ class CouponController extends Controller
         $status = Coupon::create($data);
 
         if ($status) {
-            return redirect() ->route('coupon.index') ->with('success', 'Coupon succesfully created');
+            return redirect() ->route('coupon.index') ->with('success', 'Coupon successfully created');
         } else {
             return back()->with('error', 'Something went wrong');
         }
@@ -108,7 +108,7 @@ class CouponController extends Controller
             $status = $coupon->fill($data)->save();
 
             if ($status) {
-                return redirect()->route('coupon.index') ->with('success', 'Coupon succesfully updated');
+                return redirect()->route('coupon.index') ->with('success', 'Coupon successfully updated');
             } else {
                 return back()->with('error', 'Something went wrong');
             }
@@ -131,7 +131,7 @@ class CouponController extends Controller
             if ($status) {
                 return redirect()
                     ->route('coupon.index')
-                    ->with('success', 'Coupon succesfully deleted');
+                    ->with('success', 'Coupon successfully deleted');
             } else {
                 return back()->with('error', 'oops, something went wrong');
             }

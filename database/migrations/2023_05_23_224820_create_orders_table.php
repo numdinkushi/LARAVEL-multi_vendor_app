@@ -21,31 +21,31 @@ return new class extends Migration
             $table->float('coupon')->default(0)->nullable();
             $table->string('payment_method')->default('cod');
             $table->enum('payment_status', ['paid', 'unpaid'])->default('unpaid');
-            $table->enum('condition', ['pending', 'processing', 'delivered', 'caneclled'])->default('pending');
+            $table->enum('condition', ['pending', 'processing', 'delivered', 'cancelled'])->default('pending');
             $table->float('delivery_charge')->default(0)->nullable();
             // $table->integer('quantity')->default(0);
 
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('phone');
             $table->string('country')->nullable();
             $table->string('street')->nullable();
             $table->string('address');
             $table->string('city');
-            $table->string('state');
+            $table->string('state')->nullable();
             $table->integer('postcode');
             $table->mediumText('note')->nullable();
 
             $table->string('shipping_first_name');
             $table->string('shipping_last_name');
-            $table->string('shipping_email')->unique();
+            $table->string('shipping_email');
             $table->string('shipping_phone');
             $table->string('shipping_country');
             $table->string('shipping_street');
             $table->string('shipping_address');
             $table->string('shipping_city');
-            $table->string('shipping_state');
+            $table->string('shipping_state')->nullabel();
             $table->integer('shipping_postcode');
             $table->timestamps();
         });

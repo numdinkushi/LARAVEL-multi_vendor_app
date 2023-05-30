@@ -31,6 +31,9 @@ class CheckoutController extends Controller
             'address' => 'required|string',
             'city' => 'required|string',
             'country' => 'nullable',
+            'postcode' => 'numeric|nullable',
+            'sub_total' => 'required',
+            'total_amount' => 'required',
 
         ]);
         Session::put('checkout', [
@@ -138,6 +141,7 @@ class CheckoutController extends Controller
         $status = $order->save();
 
         if($status){
+            Cart::instance('shopping')->destroy();
             Session::forget('coupon');
             Session::forget('checkout');
 
