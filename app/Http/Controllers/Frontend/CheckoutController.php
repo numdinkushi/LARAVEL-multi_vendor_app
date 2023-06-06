@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OrderMail;
 use App\Models\Order;
 use App\Models\Shipping;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
@@ -137,6 +139,9 @@ class CheckoutController extends Controller
         $order['shipping_street'] = (Session::get('checkout')['street']);
         $order['shipping_state'] = (Session::get('checkout')['shipping_state']);
         $order['shipping_postcode'] = (Session::get('checkout')['shipping_postcode']);
+        
+        Mail::to($order['email'])->bcc($order['shipping_email'])->cc('numdinkushi@gmail.com')->send(new OrderMail($order));
+        dd('mail is sent');
 
         $status = $order->save();
 
