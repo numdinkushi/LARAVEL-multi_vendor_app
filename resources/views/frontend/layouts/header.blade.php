@@ -208,7 +208,9 @@
                                 </div>
                                 <div class="cart-box d-flex justify-items-between">
                                     <a href="{{ route('cart') }}" class="btn btn-success  mr-2">{{ __('Cart') }}</a>
-                                    <a href="{{ route('checkout1') }}" class="btn btn-primary ">{{__('Checkout')}}</a>
+                                    @if(\Gloudemans\Shoppingcart\Facades\Cart::instance('shopping')->count() >0)
+                                      <a href="{{ route('checkout1') }}" class="btn btn-primary ">{{__('Checkout')}}</a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
